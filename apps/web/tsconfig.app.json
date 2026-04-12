@@ -21,5 +21,10 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": [
+    "src/utils/supabase/server.ts",
+    "src/utils/supabase/middleware.ts",
+    "page.tsx"
+  ]
 }

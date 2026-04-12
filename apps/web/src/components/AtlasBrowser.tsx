@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 interface AtlasResult {
   id: string;
@@ -12,7 +12,6 @@ interface AtlasResult {
 export default function AtlasBrowser() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<AtlasResult[]>([]);
-  const [loading, setLoading] = useState(false);
   const [aiThinking, setAiThinking] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<AtlasResult | null>(null);
 
@@ -22,7 +21,7 @@ export default function AtlasBrowser() {
   const [maxPrice, setMaxPrice] = useState(100);
   const [maxDist, setMaxDist] = useState(50);
 
-  const handleAiSearch = async (prompt: string) => {
+  const handleAiSearch = async () => {
     setAiThinking(true);
     // Ici l'IA analyserait : "BA13 moins cher que 15€ à 10km"
     // Et réglerait les filtres automatiquement.
@@ -37,7 +36,6 @@ export default function AtlasBrowser() {
 
   const searchAtlas = async () => {
     if (!query) return;
-    setLoading(true);
     try {
       const resp = await fetch(`${API_BASE}/api/v1/atlas/search?q=${query}&lat=45.76&lon=4.83&radius=${maxDist * 1000}`);
       const data = await resp.json();
@@ -47,7 +45,6 @@ export default function AtlasBrowser() {
     } catch (e) { 
       console.error("[Atlas] Search error:", e); 
     } finally {
-      setLoading(false);
     }
   };
 
@@ -60,7 +57,7 @@ export default function AtlasBrowser() {
             <input 
               className="ai-input"
               placeholder="Demandez à l'IA : 'Trouve-moi le BA13 le moins cher'..."
-              onKeyPress={(e) => e.key === 'Enter' && handleAiSearch(e.currentTarget.value)}
+              onKeyPress={(e) => e.key === 'Enter' && handleAiSearch()}
             />
             {aiThinking && <div className="loader-dots silver ml-4" />}
          </div>

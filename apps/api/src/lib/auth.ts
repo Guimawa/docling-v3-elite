@@ -1,6 +1,5 @@
 import { betterAuth } from "better-auth";
 import { stripe } from "@better-auth/stripe";
-import { pgAdapter } from "better-auth/adapters/pg";
 import { Pool } from "pg";
 import Stripe from "stripe";
 
@@ -19,7 +18,10 @@ export const getAuth = (env: any) => {
   });
 
   authInstance = betterAuth({
-    database: pgAdapter(poolInstance),
+    database: {
+      db: poolInstance,
+      type: "postgres"
+    },
     emailAndPassword: {
       enabled: true,
     },

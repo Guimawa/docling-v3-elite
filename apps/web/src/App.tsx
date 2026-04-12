@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from './lib/supabase'
 import AtlasBrowser from './components/AtlasBrowser'
 import PilotChat from './components/PilotChat'
@@ -7,6 +7,7 @@ function App() {
   const [view, setView] = useState<'dashboard' | 'atlas'>('dashboard')
   const [showPilot, setShowPilot] = useState(false)
   const [invoices, setInvoices] = useState<any[]>([])
+  const [_error, _setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -23,7 +24,7 @@ function App() {
       
       if (data) setInvoices(data)
     } catch (e) {
-      console.error(e)
+      console.error("Fetch failed");
     } finally {
       setLoading(false)
     }
@@ -34,7 +35,7 @@ function App() {
       <nav className="sidebar">
         <div style={{marginBottom: '50px'}}>
            <h1 style={{fontSize: '32px', fontWeight: '900', letterSpacing: '-2px', color: 'var(--accent-pronto)'}}>Docling<span style={{color: '#94A3B8'}}>.</span></h1>
-           <span style={{fontSize: '10px', fontWeight: '800', tracking: '2px', color: '#94A3B8', textTransform: 'uppercase'}}>Elite Pro 2026</span>
+           <span style={{fontSize: '10px', fontWeight: '800', letterSpacing: '2px', color: '#94A3B8', textTransform: 'uppercase'}}>Elite Pro 2026</span>
         </div>
         
         <div className="nav-group">
