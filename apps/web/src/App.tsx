@@ -12,14 +12,33 @@ function App() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    // Initial Auth & Hash Sync
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session)
-      if (session) setView('dashboard')
+      if (session && window.location.hash === '') setView('dashboard')
     })
+
+    const handleHash = () => {
+      const hash = window.location.hash.replace('#', '')
+      if (['dashboard', 'atlas', 'landing', 'auth'].includes(hash)) {
+        setView(hash as any)
+      } else if (!window.location.hash) {
+        setView('landing')
+      }
+    }
+    
+    window.addEventListener('popstate', handleHash)
+    handleHash() // Initial call
+    return () => window.removeEventListener('popstate', handleHash)
   }, [])
 
-  if (view === 'landing') return <LandingPage onGoAuth={() => setView('auth')} />
-  if (view === 'auth') return <AuthPage onBack={() => setView('landing')} />
+  const navigate = (newView: typeof view) => {
+    window.history.pushState(null, '', `#${newView === 'landing' ? '' : newView}`)
+    setView(newView)
+  }
+
+  if (view === 'landing') return <LandingPage onGoAuth={() => navigate('auth')} />
+  if (view === 'auth') return <AuthPage onBack={() => navigate('landing')} />
 
   async function fetchInvoices() {
     try {
@@ -42,13 +61,13 @@ function App() {
       <nav className="sidebar">
         <div style={{marginBottom: '50px'}}>
            <h1 style={{fontSize: '32px', fontWeight: '900', letterSpacing: '-2px', color: 'var(--accent-pronto)'}}>Docling<span style={{color: '#94A3B8'}}>.</span></h1>
-           <span style={{fontSize: '10px', fontWeight: '800', letterSpacing: '2px', color: '#94A3B8', textTransform: 'uppercase'}}>Elite Pro 2026</span>
+           <span style={{fontSize: '10px', fontWeight: '800', letterSpacing: '2px', color: '#94A3B8', textTransform: 'uppercase'}}>v3 Elite — by PRONTO</span>
         </div>
         
         <div className="nav-group">
           <div 
             className={`nav-item ${view === 'dashboard' ? 'active' : ''}`}
-            onClick={() => setView('dashboard')}
+            onClick={() => navigate('dashboard')}
           >
             <span>📈</span> Tableau de bord
           </div>
@@ -57,7 +76,7 @@ function App() {
           </div>
           <div 
             className={`nav-item ${view === 'atlas' ? 'active' : ''}`}
-            onClick={() => setView('atlas')}
+            onClick={() => navigate('atlas')}
           >
             <span>🌍</span> L'Atlas Prix
           </div>

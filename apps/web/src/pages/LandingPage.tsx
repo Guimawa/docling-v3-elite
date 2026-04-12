@@ -10,7 +10,10 @@ export default function LandingPage({ onGoAuth }: { onGoAuth: () => void }) {
 
       <nav className="glass-nav">
         <div className="nav-content">
+          <div className="logo-container">
           <h2 className="logo">Docling<span>.</span></h2>
+          <span className="by-pronto">by PRONTO</span>
+        </div>
           <div className="nav-links">
             <button className="btn-secondary" onClick={onGoAuth}>{t('login')}</button>
             <button className="btn-primary-ghost" onClick={onGoAuth}>{t('signup')}</button>
@@ -83,8 +86,26 @@ export default function LandingPage({ onGoAuth }: { onGoAuth: () => void }) {
           z-index: 100;
         }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 24px; font-weight: 900; letter-spacing: -1.5px; }
-        .logo span { color: #3B82F6; }
+        .logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .by-pronto {
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--accent-pronto);
+    margin-top: -8px;
+    opacity: 0.8;
+  }
+  .logo {
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    color: var(--text-dark);
+    margin: 0;
+  } .logo span { color: #3B82F6; }
         .hero {
           position: relative;
           z-index: 1;

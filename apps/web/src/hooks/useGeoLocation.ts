@@ -27,7 +27,7 @@ export function useGeoLocation() {
           }
         }
       } catch (err) {
-        console.error("Géo-détection impossible, repli sur FR:", err);
+        // Silent fallback to FR
         setConfig({ country: 'FR', lang: 'fr', legal: 'SIRET', tax: 'TVA' });
       } finally {
         setLoading(false);
