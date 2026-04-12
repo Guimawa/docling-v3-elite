@@ -1,0 +1,37 @@
+---
+description: Règle de secours — Quand bloqué, chercher avant de régresser. Toujours consulter docs projet et web.
+globs: ["**/*"]
+alwaysApply: true
+---
+
+# Debug & Rescue — Ne jamais régresser
+
+## Quand tu tournes en rond
+
+Si après plusieurs tentatives **rien ne fonctionne** (commandes échouent, erreurs récurrentes, solutions testées sans succès) :
+
+1. **Consulter d'abord la doc du projet** :
+   - `docs/FIX-BUILD-TAILWIND.md` — fix build PostCSS/autoprefixer
+- `docs/FIX-NPM-TAR-ENTRY-WINDOWS.md` — fix npm TAR_ENTRY_ERROR ENOENT sur Windows
+   - `docs/02-INSTALLATION.md`, `scripts/pre-modif-check.ps1`
+   - `README.md`, `CONTRIBUTING.md`
+   - Fichiers `*FIX*`, `*TROUBLESHOOT*`, `*NOTES*` dans le repo
+
+2. **Recherche web obligatoire** :
+   - Utiliser l'outil `web_search` avec le message d'erreur exact
+   - Chercher : `[erreur exacte] [techno] [OS]` (ex. `Cannot find module autoprefixer npm Windows`)
+   - Vérifier les issues GitHub, Stack Overflow, documentation officielle
+
+3. **Ne jamais régresser le projet** :
+   - **INTERDIT** : supprimer `.cursor/`, `.agents/` (même partiellement)
+   - Pas de modification destructive sans backup ou git stash
+   - Pas de changement de version majeure sans validation
+   - Si une solution risque de casser → proposer une alternative plus sûre
+
+## Checklist avant d'abandonner
+
+- [ ] J'ai lu la doc projet (`docs/`, README)
+- [ ] J'ai fait une recherche web avec l'erreur exacte
+- [ ] J'ai vérifié les notes/fix existants (FIX-*, TROUBLESHOOT*)
+- [ ] Je n'ai pas modifié plusieurs couches à la fois
+- [ ] Je n'ai pas supprimé `.cursor` ou `.agents`

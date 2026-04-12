@@ -1,0 +1,23 @@
+---
+description: Git checkpoint avant modifications majeures. Travail avec certitude.
+alwaysApply: false
+globs: ["**/*"]
+---
+
+# Git avant modif
+
+Pour les modifications majeures (refacto, beaucoup de fichiers) :
+
+## Avant de modifier
+
+1. Vérifier `git status`
+2. Si changements non commités : proposer `/checkpoint` ou commit manuel
+3. Baseline propre = on peut revenir en arrière si besoin
+
+## Commande
+
+`/checkpoint` — commit l'état actuel avant de procéder
+
+## Principe
+
+Travail avec certitude. Un checkpoint = point de retour si les modifs échouent.

@@ -1,0 +1,23 @@
+
+G:\Project Digitaux\docling\apps\pwa\src\features\landing\LandingPage.jsx
+   10:21  error  'useRef' is defined but never used. Allowed unused vars must match /^[A-Z_]|motion/u         no-unused-vars
+   26:10  error  'usePublicI18n' is defined but never used. Allowed unused vars must match /^[A-Z_]|motion/u  no-unused-vars
+  116:14  error  't' is not defined                                                                           no-undef
+  124:14  error  't' is not defined                                                                           no-undef
+  133:16  error  't' is not defined                                                                           no-undef
+  140:16  error  't' is not defined                                                                           no-undef
+  200:12  error  't' is not defined                                                                           no-undef
+  210:12  error  't' is not defined                                                                           no-undef
+  247:12  error  't' is not defined                                                                           no-undef
+  257:12  error  't' is not defined                                                                           no-undef
+  368:12  error  't' is not defined                                                                           no-undef
+  372:12  error  't' is not defined                                                                           no-undef
+  453:16  error  't' is not defined                                                                           no-undef
+  502:15  error  't' is not defined                                                                           no-undef
+
+G:\Project Digitaux\docling\apps\pwa\src\shared\i18n\publicI18n.js
+  35:12  error  '_' is defined but never used  no-unused-vars
+  44:12  error  '_' is defined but never used  no-unused-vars
+
+Ô£û 16 problems (16 errors, 0 warnings)
+

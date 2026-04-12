@@ -1,0 +1,38 @@
+---
+description: Intégration SonarQube MCP — analyse qualité et sécurité
+globs: 
+alwaysApply: false
+---
+
+# SonarQube MCP — Docling
+
+Quand SonarQube MCP est configuré dans Cursor, utiliser ces outils pour compléter l'Audit Bêton.
+
+## Outils disponibles
+
+| Outil | Usage Docling |
+|-------|---------------|
+| **analyze_code_snippet** | Analyser api.py, db_manager.py, ScanPage.jsx, apiClient.js |
+| **search_sonar_issues_in_projects** | Lister bugs, vulnérabilités, dette technique |
+| **search_security_hotspots** | Hotspots OWASP (injection, auth, etc.) |
+| **search_duplicated_files** | Code dupliqué |
+| **get_component_measures** | Couverture, complexité, violations |
+| **get_project_quality_gate_status** | Statut quality gate |
+
+## Quand l'utiliser
+
+- Avant une release : vérifier quality gate
+- Après modification d'un fichier critique : `analyze_code_snippet`
+- Audit sécurité ciblé : `search_security_hotspots`
+- Revue de PR : `search_sonar_issues_in_projects` (pullRequest)
+
+## Prérequis
+
+1. Projet Docling analysé dans SonarQube (CI ou sonar-scanner)
+2. MCP SonarQube configuré (URL + token)
+3. projectKey : `docling-agent` (ou celui du projet)
+
+## Référence
+
+- [SonarQube MCP Tools](https://docs.sonarsource.com/sonarqube-mcp-server/using/tools)
+- Audit Bêton : `AUDIT_BETON/10_RAPPORT_FINAL.md`

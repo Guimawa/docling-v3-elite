@@ -1,0 +1,16 @@
+{
+  "name": "docling-monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:web\" \"npm run dev:mobile\"",
+    "dev:api": "npm run dev -w docling-api",
+    "dev:web": "npm run dev -w web",
+    "dev:mobile": "npm run dev -w mobile"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

@@ -1,0 +1,34 @@
+---
+description: Gestion du JOURNAL.md — contexte de session et suivi d'avancement. Toujours actif.
+alwaysApply: true
+---
+
+# Règle JOURNAL.md
+
+## Début de session
+
+Si le projet a un `JOURNAL.md` :
+1. Lis-le en PREMIER avant tout autre fichier
+2. Affiche : "📖 Reprise du projet [nom] — Prochaine étape : [prochaine étape du journal]"
+3. Demande : "On continue sur ça ou autre chose ?"
+
+Si le projet n'a PAS de `JOURNAL.md` :
+1. Propose de le créer avec `/init-journal`
+
+## Fin de session
+
+Avant de terminer toute session de travail significative :
+1. Propose : "Je mets à jour le JOURNAL.md avec ce qu'on vient de faire ?"
+2. Si oui → mets à jour :
+   - `## Dernière session` : date, ce qui a été fait, problèmes rencontrés
+   - `## Avancement global` : recalcule le %
+   - `## Phases` : mets à jour les statuts (🔴/🟡/✅) et les %
+   - `## Prochaine étape` : décris précisément ce qu'il faudra faire
+   - `## Historique` : ajoute une ligne
+
+## Règles strictes
+
+- NE JAMAIS modifier la section `## CDC`
+- NE JAMAIS supprimer ou restructurer les phases définies
+- TOUJOURS écrire la "Prochaine étape" de façon concrète et actionnable
+- Le JOURNAL.md doit permettre à quelqu'un (ou à l'IA) de reprendre le travail sans aucune explication

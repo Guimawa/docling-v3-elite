@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#1c1917" />
+    <title>Docling — Thème Aurore (aperçu)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --c-page: 18 16 14;
+        --c-surface: 28 25 22;
+        --c-elevated: 38 34 30;
+        --c-primary: 251 191 36;
+        --c-primary-medium: 245 158 11;
+        --c-primary-light: 252 211 77;
+        --c-primary-pale: 55 48 38;
+        --c-text-primary: 248 246 242;
+        --c-text-secondary: 176 168 158;
+        --c-text-tertiary: 132 124 116;
+        --c-border: 68 62 56;
+        --c-success: 52 211 153;
+        --c-success-bg: 6 78 59;
+        --gradient-coral-btn: linear-gradient(135deg, rgb(217 119 6), rgb(245 158 11));
+        --gradient-nav: linear-gradient(180deg, rgb(22 18 15) 0%, rgb(12 10 9) 100%);
+        --shadow-md: 0 8px 28px rgb(0 0 0 / 0.4);
+        --shadow-amber-md: 0 8px 36px rgb(245 158 11 / 0.22);
+        --r-2xl: 1.375rem;
+        --font-sans: 'DM Sans', system-ui, sans-serif;
+        --font-heading: 'Playfair Display', serif;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: var(--font-sans);
+        font-size: 15px;
+        background: rgb(var(--c-page));
+        color: rgb(var(--c-text-primary));
+        -webkit-font-smoothing: antialiased;
+        position: relative;
+      }
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(ellipse 90% 50% at 12% -5%, rgb(217 119 6 / 0.16), transparent 58%),
+          radial-gradient(ellipse 65% 42% at 95% 102%, rgb(6 182 212 / 0.09), transparent 52%);
+      }
+      .layout {
+        position: relative;
+        z-index: 1;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 1.5rem 1.25rem 4rem;
+      }
+      .sidebar {
+        display: none;
+      }
+      @media (min-width: 900px) {
+        .shell {
+          display: flex;
+          min-height: 100vh;
+        }
+        .sidebar {
+          display: flex;
+          flex-direction: column;
+          width: 220px;
+          flex-shrink: 0;
+          background: var(--gradient-nav);
+          color: rgb(248 246 242);
+          padding: 1.25rem 0.75rem;
+        }
+        .sidebar-brand {
+          font-family: var(--font-heading);
+          font-size: 1.5rem;
+          font-weight: 600;
+          padding: 0.5rem 0.75rem 1.25rem;
+          border-bottom: 1px solid rgb(255 255 255 / 0.08);
+        }
+        .sidebar-brand span {
+          color: rgb(var(--c-primary-light));
+          font-style: italic;
+        }
+        .sidebar-label {
+          font-size: 0.625rem;
+          text-transform: uppercase;
+          letter-spacing: 0.15em;
+          color: rgb(255 255 255 / 0.35);
+          padding: 0.75rem 0.75rem 0.35rem;
+        }
+        .sidebar a {
+          display: block;
+          padding: 0.5rem 0.75rem;
+          border-radius: 0.75rem;
+          color: rgb(255 255 255 / 0.65);
+          text-decoration: none;
+          font-size: 0.875rem;
+          margin-bottom: 0.25rem;
+        }
+        .sidebar a:hover {
+          background: rgb(255 255 255 / 0.06);
+          color: #fff;
+        }
+        .sidebar a.active {
+          background: rgb(var(--c-primary-medium) / 0.18);
+          color: #fff;
+          box-shadow: 0 0 0 1px rgb(var(--c-primary-medium) / 0.3);
+        }
+        .layout {
+          flex: 1;
+          max-width: none;
+        }
+      }
+      .hero {
+        border-radius: var(--r-2xl);
+        border: 1px solid rgb(var(--c-border) / 0.65);
+        background: linear-gradient(135deg, rgb(var(--c-elevated) / 0.72), rgb(var(--c-surface) / 0.55));
+        backdrop-filter: blur(14px);
+        padding: 1.75rem 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: var(--shadow-md);
+      }
+      .badge {
+        display: inline-block;
+        font-size: 0.625rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        padding: 0.25rem 0.6rem;
+        border-radius: 9999px;
+        border: 1px solid rgb(var(--c-primary-medium) / 0.35);
+        background: rgb(var(--c-primary-pale) / 0.5);
+        color: rgb(var(--c-text-secondary));
+        margin-bottom: 0.5rem;
+      }
+      h1 {
+        font-family: var(--font-heading);
+        font-size: clamp(1.75rem, 4vw, 2.25rem);
+        font-weight: 600;
+        margin: 0 0 0.5rem;
+        letter-spacing: -0.02em;
+      }
+      .hero p {
+        margin: 0;
+        color: rgb(var(--c-text-secondary));
+        line-height: 1.55;
+        max-width: 36rem;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+      }
+      @media (max-width: 520px) {
+        .stats {
+          grid-template-columns: 1fr;
+        }
+      }
+      .stat {
+        border-radius: 0.75rem;
+        border: 1px solid rgb(var(--c-border) / 0.8);
+        background: rgb(var(--c-surface) / 0.6);
+        padding: 0.75rem;
+      }
+      .stat dt {
+        font-size: 0.625rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: rgb(var(--c-text-tertiary));
+        margin: 0;
+      }
+      .stat dd {
+        margin: 0.35rem 0 0;
+        font-weight: 700;
+        font-size: 0.9375rem;
+      }
+      .card {
+        border-radius: var(--r-2xl);
+        border: 1px solid rgb(var(--c-border) / 0.65);
+        background: linear-gradient(145deg, rgb(var(--c-elevated) / 0.85), rgb(var(--c-surface) / 0.5));
+        backdrop-filter: blur(12px);
+        padding: 1.25rem;
+        margin-bottom: 1.25rem;
+        box-shadow: var(--shadow-md);
+      }
+      .card h2 {
+        font-size: 0.8125rem;
+        font-weight: 700;
+        margin: 0 0 1rem;
+      }
+      label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: rgb(var(--c-text-secondary));
+        margin-bottom: 0.35rem;
+      }
+      input[type='text'] {
+        width: 100%;
+        max-width: 320px;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.5rem;
+        border: 1px solid rgb(var(--c-border));
+        background: rgb(var(--c-surface));
+        font: inherit;
+        color: rgb(var(--c-text-primary));
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        align-items: center;
+        margin-top: 1rem;
+      }
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.25rem;
+        border: none;
+        border-radius: var(--r-2xl);
+        font: inherit;
+        font-weight: 700;
+        color: rgb(26 21 16);
+        background: var(--gradient-coral-btn);
+        box-shadow: var(--shadow-amber-md);
+        cursor: default;
+      }
+      .btn-ghost {
+        padding: 0.65rem 1rem;
+        border-radius: 9999px;
+        border: 1px solid rgb(var(--c-border));
+        background: rgb(var(--c-elevated) / 0.4);
+        font: inherit;
+        font-weight: 600;
+        color: rgb(var(--c-text-secondary));
+        cursor: default;
+      }
+      .pill-ok {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.35rem 0.65rem;
+        border-radius: 9999px;
+        background: rgb(var(--c-success-bg));
+        color: rgb(var(--c-success));
+      }
+      footer {
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgb(var(--c-border) / 0.6);
+        font-size: 0.75rem;
+        color: rgb(var(--c-text-tertiary));
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Navigation (démo desktop)">
+        <div class="sidebar-brand">Doc<span>ling</span></div>
+        <div class="sidebar-label">Principal</div>
+        <a href="#" class="active">Scanner</a>
+        <a href="#">Validation</a>
+        <a href="#">Catalogue</a>
+        <div class="sidebar-label">Suivi</div>
+        <a href="#">Historique</a>
+        <a href="#">Réglages</a>
+      </aside>
+      <div class="layout">
+        <header class="hero">
+          <span class="badge">Thème · Aurore</span>
+          <h1>Glass sombre, halos ambre & cyan</h1>
+          <p>
+            Dark-first 2026 : cartes vitrées, dégradés chauds et touche cyan en arrière-plan. Effet premium
+            sans surcharge — lisibilité sur texte off-white.
+          </p>
+        </header>
+
+        <section class="stats" aria-label="Indicateurs démo">
+          <div class="stat">
+            <dt>Connexion</dt>
+            <dd>API OK</dd>
+          </div>
+          <div class="stat">
+            <dt>Modèle IA</dt>
+            <dd>Gemini 3.1 Pro</dd>
+          </div>
+          <div class="stat">
+            <dt>Sync</dt>
+            <dd>Actif</dd>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Bloc formulaire (glass)</h2>
+          <label for="demo">Fournisseur</label>
+          <input id="demo" type="text" value="BIGMAT — démo statique" readonly />
+          <div class="row">
+            <button type="button" class="btn-primary">Lancer l’extraction</button>
+            <button type="button" class="btn-ghost">Exporter CSV</button>
+            <span class="pill-ok">● Données validées</span>
+          </div>
+        </section>
+
+        <footer>
+          Aperçu HTML statique — tokens alignés sur <code>data-theme=&quot;aurora&quot;</code> de la PWA Docling
+          (mesh radial sur <code>body</code>).
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

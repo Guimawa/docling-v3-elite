@@ -1,0 +1,24 @@
+---
+description: Conventions tests — couverture, structure. Priorité 50.
+globs: ["**/*.test.*", "**/*.spec.*", "**/tests/**", "**/__tests__/**"]
+alwaysApply: false
+---
+
+# Testing Standards
+
+## Obligatoire
+
+- Toujours générer ou mettre à jour les tests pour nouvelle logique.
+- Tests réels : pas de mock des API externes (DB, APIs tierces).
+
+## Structure
+
+- Unit : logique isolée.
+- Integration : flux complets, API réelle.
+- E2E : parcours critiques (on-demand).
+
+## Patterns
+
+- Arrange, Act, Assert.
+- Un concept par test.
+- Noms descriptifs : test_should_do_x_when_y.

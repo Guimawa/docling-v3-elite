@@ -1,0 +1,61 @@
+---
+description: Emmet — syntaxe abréviations HTML/CSS/JSX pour productivité frontend
+globs: ["**/*.{html,jsx,tsx,css,scss}"]
+alwaysApply: false
+---
+
+# Emmet — Toolkit web frontend
+
+Référence : [docs.emmet.io](https://docs.emmet.io/)
+
+Emmet est intégré à Cursor/VSCode. Utiliser les abréviations CSS-like pour générer du HTML/JSX rapidement.
+
+## Règle impérative : appliquer les correctifs du rapport
+
+**Quand tu modifies un fichier listé dans `docs/workflow/EMMET-OPPORTUNITIES.md`** :
+1. Consulter le rapport pour les opportunités de ce fichier
+2. Appliquer les simplifications suggérées (extraction composants, patterns Emmet)
+3. Réduire le code verbeux en suivant les abréviations proposées
+
+Régénérer le rapport : `make emmet-analyze` ou `python scripts/analyze_emmet_opportunities.py`
+
+## Syntaxe abréviations
+
+| Opérateur | Signification | Exemple |
+|-----------|---------------|---------|
+| `>` | Enfant | `div>ul>li` |
+| `+` | Frère | `div+p+span` |
+| `^` | Remonter niveau | `div>p^blockquote` |
+| `*` | Multiplication | `ul>li*5` |
+| `()` | Groupe | `(header>nav)+(main>section)` |
+| `#` | id | `div#header` |
+| `.` | class | `div.container` |
+| `[]` | Attributs | `a[href="#" target=_blank]` |
+| `$` | Numérotation | `li.item$*4` → item1, item2… |
+| `{}` | Texte | `a{Cliquez ici}` |
+
+## Exemples Docling (JSX/React)
+
+```
+div.card>h2{Title}+p{Lorem}
+ul.nav>li*4>a{Item $}
+div.grid>div.col*3
+form>(label+input)*3+button{Envoyer}
+```
+
+**Tab** pour développer l’abréviation.
+
+## Actions principales
+
+| Action | Raccourci (Windows) |
+|--------|---------------------|
+| Expand Abbreviation | `Tab` |
+| Wrap with Abbreviation | `Ctrl+Shift+G` |
+| Balance (sélection tag) | `Ctrl+Shift+D` |
+| Go to Matching Pair | `Ctrl+Alt+J` |
+| Next/Previous Edit Point | `Ctrl+Alt+→` / `Ctrl+Alt+←` |
+| Toggle Comment | `Ctrl+/` |
+
+## CSS
+
+Abréviations CSS supportées : `m10` → `margin: 10px`, `p10` → `padding: 10px`, `d:f` → `display: flex`, etc.

@@ -1,0 +1,45 @@
+---
+description: Conventions backend FastAPI, asyncpg, Pydantic — Docling
+globs: ["apps/api/**/*.py", "migrations/**/*.py"]
+alwaysApply: false
+---
+
+# Backend Conventions — Docling
+
+## Stack
+
+- **Framework** : FastAPI (async)
+- **BDD** : PostgreSQL Neon via asyncpg
+- **Validation** : Pydantic v2
+- **Config** : pydantic-settings (.env)
+
+## Type hints
+
+- Toujours typer les paramètres et retours
+- Utiliser `list[str]` (pas `List[str]`)
+- Utiliser `str | None` (pas `Optional[str]`)
+- `async def` pour les fonctions I/O
+
+## Endpoints API
+
+- Préfixe : `/api/v1/`
+- Auth : `Depends(get_current_user)` pour les routes protégées
+- Réponses : `HTTPException` pour les erreurs
+- Pagination : cursor-based (pas OFFSET)
+
+## Base de données
+
+- Pool : min 2, max 10 connexions
+- URL : utiliser `-pooler` pour PgBouncer (Neon)
+- Migrations : Alembic
+
+## Services
+
+- `backend/services/` : logique métier
+- `backend/core/` : config, db, orchestrator
+- Pas de logique métier dans `api.py`
+
+## Lint
+
+- Ruff : `ruff check .`
+- Line length : 100

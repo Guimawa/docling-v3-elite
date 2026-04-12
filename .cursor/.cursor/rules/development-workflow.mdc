@@ -1,0 +1,86 @@
+---
+description: Méthode de développement — À APPLIQUER pour ne pas casser le projet. Toujours valider avant/après.
+globs: ["**/*"]
+alwaysApply: true
+---
+
+# Méthode de développement — Docling
+
+## Principe : ne pas casser
+
+Changements **incrémentaux**. Pas de refacto massif. Valider à chaque étape.
+
+---
+
+## AVANT de modifier du code
+
+1. **Lire** les fichiers concernés (pas tout le projet)
+2. **Vérifier** s'il existe spec/design dans `docs/workflow/2_inprogress/` pour la feature
+3. **Ne pas** supprimer ou réécrire sans comprendre l'existant
+4. **Ne pas** changer plusieurs choses en même temps (backend + frontend + config)
+
+---
+
+## PENDANT les modifications
+
+1. **Une chose à la fois** : un endpoint, un composant, une migration
+2. **Respecter** les conventions (backend-conventions, frontend-conventions)
+3. **Réutiliser** l'existant : composants, services, patterns
+4. **Pas de "cleanup"** en passant — uniquement ce qui est demandé
+
+---
+
+## APRÈS les modifications — OBLIGATOIRE
+
+**L'agent EXÉCUTE** (ne pas demander à l'utilisateur) une validation **ciblée** selon les fichiers touchés :
+
+```bash
+# Backend uniquement
+python -m ruff check apps/api
+python -m pytest apps/api/tests/unit -q
+
+# Frontend uniquement
+pnpm --dir apps/pwa lint
+pnpm --dir apps/pwa test -- --run <tests-concernes>
+
+# Changement transversal backend+frontend/infra
+.\scripts\validate_all.ps1
+```
+
+`validate_all` reste requis avant merge/release ou si plusieurs couches sont modifiées.
+Si échec -> corriger avant de finir.
+
+---
+
+## Workflow par stages
+
+| Stage | Dossier | Action |
+|-------|---------|--------|
+| Idée | `docs/workflow/0_backlog/` | Fichier .md par idée |
+| Planning | `docs/workflow/1_planning/` | README, spec, design avant de coder |
+| Implémentation | `docs/workflow/2_inprogress/` | Coder selon spec, tenir implementation_notes |
+| Livré | `docs/workflow/3_completed/` | summary.md, déplacer |
+
+**Règle** : pas de code en `2_inprogress/` sans spec/design validé.
+
+---
+
+## En cas de régression
+
+1. Identifier le fichier/commit qui a cassé
+2. Revenir en arrière si nécessaire (git)
+3. Réappliquer le changement en plus petit
+4. Valider après chaque micro-changement
+
+---
+
+## Outils — UTILISER, pas suggérer
+
+| Moment | Outil à exécuter |
+|--------|------------------|
+| Après toute modif | Validation ciblée (lint + tests concernés) |
+| Review code | `.\scripts\review.ps1` (ruff + gito si installé) |
+| Avant "c'est fait" | Validation ciblée verte |
+| Avant merge/release | `.\scripts\validate_all.ps1` |
+
+Ne pas dire "c'est fait" sans preuve de validation exécutée (ciblée ou complète selon le contexte).

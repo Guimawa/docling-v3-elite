@@ -1,0 +1,16 @@
+# Dependances
+node_modules/
+.wrangler/
+dist/
+
+# Environnement
+.env
+.env.local
+.dev.vars
+
+# Système
+.DS_Store
+Thumbs.db
+tmp/
+scratch/
+%TEMP%/

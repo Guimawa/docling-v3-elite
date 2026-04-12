@@ -1,0 +1,49 @@
+---
+description: Routine DevOps senior — validate, review, docs. Toujours appliqué pour maintenir qualité.
+globs:
+alwaysApply: true
+---
+
+# Routine DevOps Senior
+
+Routine obligatoire inspirée de [cursor-agents](https://github.com/pridiuksson/cursor-agents) et [APM](https://github.com/sdi2200262/agentic-project-management).
+
+## Avant toute modification
+
+1. **Lire** les fichiers concernés
+2. **Vérifier** spec/design dans `docs/workflow/` si feature en cours
+3. **Ne pas** modifier plusieurs couches en même temps (backend + frontend + config)
+
+## Pendant
+
+1. **Une chose à la fois** : un endpoint, un composant, une migration
+2. **Quality gates** : si auth/endpoints → prévoir revue sécurité
+3. **Tests réels** : jamais de mock des API externes (Gemini, DB)
+
+## Après — OBLIGATOIRE
+
+```bash
+# Validation ciblée par défaut
+# - backend: ruff + pytest ciblé
+# - frontend: eslint + vitest ciblé
+```
+
+`make validate-all` (ou `.\scripts\validate_all.ps1`) reste obligatoire avant merge/release
+ou lorsqu'une modification touche plusieurs couches.
+
+**Ne jamais dire "c'est fait" sans avoir exécuté une validation appropriée au scope (ciblée ou complète).**
+
+## Routine quotidienne
+
+| Moment | Action |
+|--------|--------|
+| Début session | `make health-check` si API/DB |
+| Après modif | Validation ciblée (tests/lint concernés) |
+| Avant commit important / merge / release | `make validate-all` |
+| Feature terminée | @docs + déplacer vers `3_completed/` |
+
+## En cas de blocage
+
+1. Consulter `docs/REPORTS/REPOS-ANALYSE-DETAILLEE-2026.md`
+2. Ad-Hoc pattern (APM) : délégation vers agent spécialisé (debug, research)
+3. Handover : si contexte saturé, documenter dans Memory Log avant nouvelle session

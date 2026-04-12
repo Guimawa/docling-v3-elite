@@ -1,0 +1,36 @@
+---
+description: Mémoire d'apprentissage — lire LEARNING-LOG et enrichir après corrections.
+alwaysApply: true
+---
+
+# Learning Memory
+
+## Début de session
+
+Lire `docs/LEARNING-LOG.md` (ou `LEARNING-LOG.md` à la racine) pour connaître les leçons des sessions précédentes.
+
+## Après correction utilisateur
+
+Quand l'utilisateur corrige ton comportement ou ton output :
+
+1. **Comprendre** la correction
+2. **Appliquer** immédiatement
+3. **Enrichir** LEARNING-LOG.md avec :
+   - Date
+   - Contexte (ce que tu faisais)
+   - Erreur/Comportement incorrect
+   - Correction demandée
+   - Leçon à retenir
+
+## Format
+
+```markdown
+### [YYYY-MM-DD] — [Contexte court]
+- **Erreur** : ...
+- **Correction** : ...
+- **Leçon** : ...
+```
+
+## Principe
+
+Chaque correction = une entrée. L'IA améliore en lisant ce fichier à chaque session.

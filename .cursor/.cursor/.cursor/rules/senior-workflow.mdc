@@ -1,0 +1,33 @@
+---
+description: Routine DevOps senior — validate, review, docs. Toujours appliqué.
+alwaysApply: true
+---
+
+# Routine DevOps Senior
+
+## Avant toute modification
+
+1. Lire les fichiers concernés.
+2. Vérifier spec/design si feature en cours.
+3. **Modifs majeures** : `/checkpoint` ou git commit avant de procéder.
+4. Ne pas modifier plusieurs couches en même temps.
+
+## Pendant
+
+1. Une chose à la fois : un endpoint, un composant, une migration.
+2. Quality gates : si auth/endpoints, prévoir revue sécurité.
+3. Tests réels : jamais de mock des API externes.
+
+## Après — OBLIGATOIRE
+
+Exécuter la chaîne de validation du projet (lint + tests).
+
+**Ne jamais dire "c'est fait" sans validation réussie.**
+
+## Routine quotidienne
+
+| Moment | Action |
+|--------|--------|
+| Début session | Health-check si API/DB |
+| Après modif | validate-all |
+| Avant commit | validate-all |

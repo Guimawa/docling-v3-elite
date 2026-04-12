@@ -1,0 +1,23 @@
+---
+description: Stage Planning — Contexte chargé quand tu travailles dans docs/workflow/1_planning/
+globs: ["docs/workflow/1_planning/**"]
+alwaysApply: false
+---
+
+# Stage Planning
+
+Tu es dans **1_planning/**. Une feature est en phase de planification.
+
+## Rôle
+
+1. **Structurer** : Pour chaque feature, créer/compléter README.md, spec.md, design.md
+2. **Respecter Docling** : FastAPI + React, Neon PostgreSQL, extraction factures BTP
+3. **Rester concis** : Pas de superflu
+
+## Fichiers attendus par feature
+
+- `README.md` — objectif, critères de succès
+- `spec.md` — spécification fonctionnelle
+- `design.md` — design technique (API, schéma, composants)
+
+Quand validé → déplacer dans `2_inprogress/`.

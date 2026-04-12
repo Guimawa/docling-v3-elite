@@ -1,0 +1,24 @@
+---
+description: Exigences sécurité — validation, secrets, exposition. Priorité 100.
+alwaysApply: true
+---
+
+# Security Requirements
+
+## Obligatoire
+
+- Valider et sanitizer toutes les entrées externes.
+- Ne jamais logger ni exposer de données sensibles.
+- Utiliser des variables d'environnement pour tous les secrets.
+- Éviter de révéler les détails internes des erreurs dans les réponses.
+
+## Auth
+
+- Requêtes paramétrées — pas de concaténation SQL.
+- Tokens, sessions, validation des droits.
+- Validation des entrées utilisateur.
+
+## Secrets
+
+- Pas de secrets en clair (env, config).
+- Jamais de credentials dans le code ou les commits.

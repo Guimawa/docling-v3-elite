@@ -1,0 +1,39 @@
+---
+description: Patterns tests — pytest, Vitest, fixtures — Docling
+globs: ["tests/**/*.py", "docling-pwa/src/**/*.test.{js,jsx}", "docling-pwa/src/**/__tests__/*"]
+alwaysApply: false
+---
+
+# Référence outils IA tests
+
+Pour suggestions : [docs/ai-library/08-testing-qa.md](docs/ai-library/08-testing-qa.md). Index complet : [docs/ai-library/README.md](docs/ai-library/README.md).
+
+# Testing Patterns — Docling
+
+## Backend (pytest)
+
+- **01_unit** : tests unitaires sans serveur
+- **02_integration** : tests avec DB réelle
+- **03_api** : tests endpoints (serveur requis)
+- **04_e2e** : Playwright
+- **05_security** : auth bypass, injection
+
+## Fixtures (conftest.py)
+
+- `authenticated_client` : client HTTP avec session
+- `ensure_server_running` : vérifie serveur
+- `unique_user` : Faker pour utilisateurs
+- `sample_products` : produits Faker
+
+## Markers
+
+- `@pytest.mark.slow` : tests > 5s
+- `@pytest.mark.security` : tests sécurité
+- `@pytest.mark.e2e` : Playwright
+- `@pytest.mark.external` : Gemini, Storj
+
+## Frontend (Vitest)
+
+- `src/__tests__/` ou `**/__tests__/`
+- jsdom pour le DOM
+- Coverage : 60% lignes

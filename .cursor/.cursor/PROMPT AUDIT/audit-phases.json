@@ -1,0 +1,71 @@
+{
+  "$schema": "Mapping des phases d'audit vers les agents Cursor spécialisés",
+  "master": {
+    "file": "00_MASTER_PROMPT.md",
+    "description": "Point d'entrée unique — Règles absolues, séquence INIT, ordre d'exécution"
+  },
+  "phases": [
+    {
+      "phase": "01",
+      "prompt": "01_NETTOYAGE.md",
+      "agent": "context-specialist",
+      "description": "Nettoyage projet — Fichiers parasites, orphelins, dupliqués"
+    },
+    {
+      "phase": "02",
+      "prompt": "02_CARTOGRAPHIE.md",
+      "agent": "context-specialist",
+      "description": "Cartographie exhaustive — Référence de TOUS les fichiers"
+    },
+    {
+      "phase": "03",
+      "prompt": "03_BACKEND.md",
+      "agent": "api-reviewer",
+      "description": "Audit backend — Python, FastAPI, endpoints, services"
+    },
+    {
+      "phase": "04",
+      "prompt": "04_FRONTEND.md",
+      "agent": "feature-developer",
+      "description": "Audit frontend — React, Vite, composants, hooks"
+    },
+    {
+      "phase": "05",
+      "prompt": "05_BASE_DE_DONNEES.md",
+      "agent": "migration-assistant",
+      "description": "Audit BDD — Migrations, schémas, Neon PostgreSQL"
+    },
+    {
+      "phase": "06",
+      "prompt": "06_SECURITE.md",
+      "agent": "security-reviewer",
+      "description": "Audit sécurité — OWASP Top 10, JWT, injection"
+    },
+    {
+      "phase": "07",
+      "prompt": "07_TESTS.md",
+      "agent": "test-generator",
+      "description": "Audit tests — pytest, Vitest, écriture des manquants"
+    },
+    {
+      "phase": "08",
+      "prompt": "08_BUILD_DEPLOIEMENT.md",
+      "agent": "system-architect",
+      "description": "Audit build — Docker, CI/CD, déploiement"
+    },
+    {
+      "phase": "09",
+      "prompt": "09_PERFORMANCE.md",
+      "agent": "context-specialist",
+      "description": "Audit performance — Backend, frontend, bundle"
+    },
+    {
+      "phase": "10",
+      "prompt": "10_RAPPORT_FINAL.md",
+      "agent": "docs-writer",
+      "description": "Rapport final — Scorecard, plan d'action, verdict"
+    }
+  ],
+  "output_dir": "AUDIT_BETON",
+  "order_strict": true
+}

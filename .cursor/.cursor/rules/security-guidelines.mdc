@@ -1,0 +1,30 @@
+---
+description: Guidelines sécurité — auth, injection, secrets — Docling
+globs: ["**/*"]
+alwaysApply: false
+---
+
+# Security Guidelines — Docling
+
+## Auth
+
+- JWT : httpOnly cookie ou Bearer
+- Mots de passe : argon2id (auth_service)
+- Pas de secrets dans le code
+
+## API
+
+- Rate limiting : SlowAPI
+- CORS : configuré strictement
+- Headers sécurité : X-Content-Type-Options, etc.
+
+## Base de données
+
+- Paramètres préparés (asyncpg) — pas de concaténation SQL
+- Échappement ILIKE : `_escape_like()`
+
+## Variables d'environnement
+
+- JWT_SECRET : 32+ caractères
+- DATABASE_URL : jamais en clair dans le repo
+- .env dans .gitignore

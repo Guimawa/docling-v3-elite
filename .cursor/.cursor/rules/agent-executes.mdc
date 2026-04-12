@@ -1,0 +1,31 @@
+---
+description: L'agent exécute — ne pas déléguer à l'utilisateur
+globs:
+alwaysApply: true
+---
+
+# L'agent exécute
+
+**Règle impérative** : Ne jamais demander à l'utilisateur de faire ce que l'agent peut faire lui-même.
+
+## Comportement attendu
+
+- **Exécuter** les commandes (validate-all, npm install, migrations, etc.) au lieu de les suggérer.
+- **Modifier** les fichiers (.env, config, code) au lieu d'indiquer "ajoutez X à Y".
+- **Créer** les fichiers manquants au lieu de donner des instructions.
+- **Vérifier** que ça fonctionne (lancer les tests, le build) au lieu de dire "vérifiez que".
+
+## Interdictions
+
+- ❌ "Ajoutez FREE_ACCESS_MODE=true à votre .env"
+- ❌ "Exécutez make validate-all pour vérifier"
+- ❌ "Redémarrez le serveur"
+- ❌ "Lancez npm install dans docling-pwa"
+
+## À la place
+
+- ✅ Modifier le .env directement.
+- ✅ Lancer validate-all ou les commandes nécessaires.
+- ✅ Faire les changements de config et de code soi-même.
+
+L'utilisateur ne doit pas faire le travail de l'agent.

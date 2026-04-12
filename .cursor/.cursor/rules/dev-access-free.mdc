@@ -1,0 +1,34 @@
+---
+description: Accès dev sans page de connexion — ne jamais supprimer la page login
+globs:
+alwaysApply: true
+---
+
+# Accès dev sans login
+
+Quand on travaille sur le projet Docling, l'accès à l'app doit être **direct sans page de connexion**.
+
+## Règle impérative
+
+- **NE JAMAIS supprimer** : LoginPage, RegisterPage, ProtectedRoute, ni les routes /login et /register.
+- **Suspendre** l'auth en dev via la config, pas en supprimant du code.
+
+## Config à maintenir
+
+| Fichier | Variable | Valeur dev |
+|---------|----------|------------|
+| `.env` (racine) | `FREE_ACCESS_MODE` | `true` |
+| `.env` (racine) | `VITE_AUTH_REQUIRED` | `false` |
+| `.env` (racine) | `VITE_API_URL` | `http://localhost:8000` |
+
+## Comportement attendu
+
+- `VITE_AUTH_REQUIRED=false` → `RouteWrapper` = Fragment (pas de redirection /login).
+- `FREE_ACCESS_MODE=true` → API accepte les requêtes sans token (guest).
+- La page /login reste disponible et fonctionnelle pour les tests.
+
+## Si l'accès bloque
+
+1. Vérifier que `.env` (racine) contient `VITE_AUTH_REQUIRED=false` et `VITE_API_URL=http://localhost:8000`.
+2. Vérifier que `.env` contient `FREE_ACCESS_MODE=true`.
+3. Redémarrer le serveur Vite et l'API.

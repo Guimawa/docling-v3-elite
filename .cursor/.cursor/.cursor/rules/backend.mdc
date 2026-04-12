@@ -1,0 +1,26 @@
+---
+description: Conventions backend — API, DB, services. Priorité 40.
+globs: ["backend/**", "api/**", "src/api/**", "**/api/**"]
+alwaysApply: false
+---
+
+# Backend Conventions
+
+## API
+
+- Préfixe versionné : /api/v1/
+- Auth : dépendances pour routes protégées.
+- Réponses : codes HTTP cohérents, erreurs structurées.
+- Pagination : cursor-based plutôt qu'OFFSET.
+
+## Base de données
+
+- Requêtes paramétrées.
+- Transactions pour opérations multi-étapes.
+- Migrations versionnées.
+
+## Services
+
+- Logique métier dans services/, pas dans routes.
+- Type hints complets.
+- async pour I/O.

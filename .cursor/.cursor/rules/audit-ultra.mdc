@@ -1,0 +1,14 @@
+---
+description: Chemins fixes pour la mission audit ultra (19 familles) — ne pas redemander les bases à l’humain.
+alwaysApply: false
+---
+
+# Audit ultra — chemins repo Docling
+
+- **Kit** : `.agents/kit/cursor-project-kit/`
+- **Mission** : `orchestrator/missions/audit-ultra-complet.md`
+- **Prompt** : `.agents/kit/prompt-audit-ultra.txt` (ou copie depuis `cursor-project-kit/scripts/prompt-audit-ultra.txt`)
+- **Livrables d’un run** : `orchestrator/workspace/audit/ultra/<RUN_ID>/` (ex. `audit-ultra-YYYYMMDD-HHmm`)
+- **Templates** : `orchestrator/workspace/audit/ultra/templates/`
+
+Les runs historiques ne sont en général pas versionnés ; les templates oui.

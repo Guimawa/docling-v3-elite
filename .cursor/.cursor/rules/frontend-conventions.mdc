@@ -1,0 +1,41 @@
+---
+description: Conventions frontend React, Vite, Zustand — Docling PWA
+globs: ["apps/pwa/src/**/*.{js,jsx,ts,tsx}"]
+alwaysApply: false
+---
+
+# Frontend Conventions — Docling PWA
+
+## Stack
+
+- **Framework** : React 19
+- **Build** : Vite 5
+- **Styles** : Tailwind 4
+- **State** : Zustand (`useStore.js`)
+
+## Structure
+
+- `src/features/` : pages par feature (scan, catalogue, devis, auth, etc.)
+- `src/components/` : composants partagés
+- `src/shared/` : config, lib, ui
+
+## API
+
+- `apiClient.js` : client Axios configuré
+- Endpoints centralisés dans `config/api.js`
+
+## Composants
+
+- Fonctionnels (hooks)
+- Pas de classes
+- Props typées si TypeScript
+
+## Tests
+
+- Vitest + Testing Library
+- Coverage minimum : 60%
+
+## UI/UX Pro Max
+
+Pour design system, refonte, nouvelles pages : voir [docs/UI-UX-PRO-MAX-USAGE.md](../../docs/UI-UX-PRO-MAX-USAGE.md).
+Commande : `make design-system`

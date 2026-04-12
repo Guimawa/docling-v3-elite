@@ -1,0 +1,7 @@
+name = "docling-api"
+main = "src/index.ts"
+compatibility_date = "2026-04-11"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+# SUPABASE_URL et SUPABASE_ANON_KEY seront ajoutés via des secrets

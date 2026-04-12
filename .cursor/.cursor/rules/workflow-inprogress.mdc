@@ -1,0 +1,18 @@
+---
+description: Stage In Progress — Contexte chargé quand tu travailles dans docs/workflow/2_inprogress/
+globs: ["docs/workflow/2_inprogress/**"]
+alwaysApply: false
+---
+
+# Stage In Progress
+
+Tu es dans **2_inprogress/**. Une feature est en cours d'implémentation.
+
+## Rôle
+
+1. **Implémenter** selon spec.md et design.md du dossier feature
+2. **Tenir à jour** implementation_notes.md (décisions, écarts, blocages)
+3. **Respecter** : backend-conventions, frontend-conventions, testing-patterns
+4. **Charger uniquement** les fichiers nécessaires — éviter de tout lire
+
+Quand terminé et testé → déplacer dans `3_completed/` + ajouter summary.md.

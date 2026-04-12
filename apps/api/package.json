@@ -1,0 +1,22 @@
+{
+  "name": "docling-api",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev src/index.ts",
+    "deploy": "wrangler deploy --minify src/index.ts"
+  },
+  "dependencies": {
+    "@better-auth/stripe": "^1.6.2",
+    "@google/generative-ai": "^0.21.0",
+    "@supabase/supabase-js": "^2.48.1",
+    "better-auth": "^1.6.2",
+    "hono": "^4.6.14",
+    "pg": "^8.20.0",
+    "stripe": "^20.4.1"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241218.0",
+    "wrangler": "^3.99.0"
+  }
+}

@@ -1,0 +1,104 @@
+[project]
+name = "docling-api"
+version = "3.0.0"
+description = "Catalogue de prix BTP — extraction IA de factures"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "asyncpg>=0.31",
+    "google-genai>=1.64,<2",
+    "httpx>=0.27",
+    "opencv-python-headless>=4.10",
+    "pydantic>=2.9",
+    "pydantic-settings>=2.13",
+    "watchdog>=5.0",
+    "boto3>=1.40",
+    "PyJWT>=2.12.0",
+    "argon2-cffi>=25.1",
+    "sentry-sdk[fastapi]>=2.53",
+    "slowapi>=0.1",
+    "alembic>=1.18",
+    "python-dotenv>=1.0",
+    "python-multipart>=0.0.22",
+    "lxml>=5.4",
+    "google-generativeai>=0.8",
+    "pymupdf>=1.24",
+    "frozendict>=2.4",
+    "paddleocr>=2.9",
+    "paddlepaddle>=2.6.2",
+]
+
+[project.optional-dependencies]
+redis = [
+    "redis>=5",
+]
+gcs = [
+    "google-cloud-storage>=2.14",
+]
+dev = [
+    "pytest>=8",
+    "pytest-asyncio>=1.2",
+    "pytest-cov",
+    "ruff>=0.4",
+    "httpx>=0.27",
+    "faker>=30",
+    "psycopg2-binary>=2.9",
+    "playwright>=1.49",
+    "locust>=2.32",
+    "pytest-timeout>=2.3",
+    "bandit[toml]>=1.8",
+]
+
+[tool.uv]
+constraint-dependencies = [
+    "requests>=2.33.0",
+    "pyasn1>=0.6.3",
+]
+
+# Remplace l’ancien tool.uv.dev-dependencies (déprécié) — `uv sync --group dev` / `uv run` résolvent ce groupe.
+[dependency-groups]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "pytest-cov>=6.0",
+    "pytest-timeout>=2.3",
+    "ruff",
+    "httpx",
+    "faker",
+    "playwright>=1.49",
+    "bandit[toml]>=1.8",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "B", "UP"]
+ignore = ["E501", "B008"]
+
+# Fichier fourni intégré à l’identique (import `json, logging, os` conservé)
+[tool.ruff.lint.per-file-ignores]
+"services/attribute_extractor.py" = ["E401", "I001"]
+
+# SAST manuel / CI optionnelle : `uv run bandit -c pyproject.toml -r .`
+[tool.bandit]
+exclude_dirs = ["tests", "migrations", ".venv", "build"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "core", "services", "schemas"]
+pythonpath = ["."]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+asyncio_mode = "auto"
+# --timeout : évite qu'un test (serveur embarqué + Neon) bloque indéfiniment validate_all / CI
+addopts = "--strict-markers -v --tb=short --durations=10 --timeout=180"
+markers = [
+    "slow: tests > 5 secondes",
+    "security: tests de sécurité",
+    "e2e: tests end-to-end (Playwright)",
+    "performance: tests de performance",
+    "external: tests avec services externes (Gemini, Storj)",
+]

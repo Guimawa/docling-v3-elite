@@ -1,0 +1,24 @@
+---
+description: Conventions CI/CD, déploiement. Priorité 40.
+globs: [".github/**", "Dockerfile*", "docker-compose*", ".gitlab-ci*"]
+alwaysApply: false
+---
+
+# DevOps Conventions
+
+## CI
+
+- Lint + tests sur chaque push/PR.
+- Branches protégées : validation obligatoire avant merge.
+- Secrets : variables d'environnement, jamais en clair.
+
+## Déploiement
+
+- Build reproductible.
+- Variables d'environnement pour config.
+- Health checks pour les services.
+
+## Docker
+
+- Multi-stage si possible.
+- .dockerignore pour exclure node_modules, .git, etc.

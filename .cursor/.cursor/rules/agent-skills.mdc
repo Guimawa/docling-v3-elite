@@ -1,0 +1,82 @@
+---
+description: Intégration Agent Skills — découverte, chargement et activation des skills pour l'agent Cursor
+globs: ["**/*"]
+alwaysApply: true
+---
+
+# Agent Skills — Docling
+
+Ce projet utilise le format [Agent Skills](https://agentskills.io/specification) pour étendre les capacités de l'agent Cursor.
+
+## Emplacements des skills
+
+| Emplacement | Portée |
+|-------------|--------|
+| `.agents/skills/` | Skills projet Docling + **bibliothèque audit** `library/` (71 experts 19 familles) — **une seule racine** |
+| `.cursor/skills/` | Skills projet alternatif |
+| `~/.cursor/skills/` | Skills personnels (hors repo) |
+
+**IMPORTANT** : Ne jamais créer de skills dans `~/.cursor/skills-cursor/` — réservé aux skills internes Cursor.
+
+## Flux d'activation
+
+1. **Découverte** : Au démarrage, Cursor charge les métadonnées (name, description) de chaque SKILL.md
+2. **Matching** : Quand une tâche utilisateur correspond à la description d'un skill → l'agent le considère pertinent
+3. **Activation** : Lire le SKILL.md complet via l'outil Read pour obtenir les instructions détaillées
+4. **Exécution** : Pour les scripts référencés dans un skill → exécuter via Shell si le skill le demande
+
+## Règles d'utilisation
+
+### Quand activer un skill
+
+- **neon-postgres** : Questions sur Neon, PostgreSQL serverless, connexions, migrations, asyncpg, PgBouncer
+- **docling-factures** : Extraction factures, pipeline IA, catalogue BTP, API Docling, watchdog, Gemini
+- **multi-agent-workflow** : Coordination agents, quality gates, routine DevOps, handover, cursor-agents, APM
+- **ui-ux-pro-max** : Design system, landing, dashboard, refonte UI/UX, couleurs, typographie, 67 styles
+- **ui-ux-audit-2026** : Audit UI/UX de bout en bout, revue critique des pages, rapport priorisé, design system
+- **ui-ux-fixer-2026** : Appliquer les corrections de `AUDIT-UI-UX.md` (fixes critiques, design system, a11y, animations)
+- **docling-security-full-audit** : Audit sécurité exhaustif du monorepo, lecture intégrale des sources, **interdiction** de s'appuyer sur rapports `.md` historiques (AUDIT, FIXES, JOURNAL, etc.) — orchestration sous-agents backend / PWA / infra
+- **docling-code-quality-full-audit** : Audit qualité code exhaustif (style, syntaxe, rédaction UI, maintenabilité), lecture intégrale des sources, **interdiction** des rapports `.md` historiques comme vérité — veille web 2026 — orchestrateur `.cursor/agents/docling-code-quality-audit-orchestrator.md`
+- **docling-landing-marketing** : Landing publique — copy honnête, FAQ par rubriques, démo vidéo, footer ; ne pas s’appuyer sur vieux rapports `.md` comme vérité produit
+- **docling-legal-footer-expert** (agent `.cursor/agents/docling-legal-footer-expert.md`) : Footer légal complet, pages mentions/CGU/confidentialité/accessibilité/cookies/plan du site, i18n FR/ES/CA, SEO `usePageSeo`
+- **docling-prod-gaps-benchmark** : Orchestration **E2E avec agents** (System Architect, Context Specialist, Feature Developer, Security Reviewer, Docs Writer) — prod, benchmark, backlog, implémentation, validate_all ; `.cursor/agents/docling-prod-competitive-orchestrator.md`
+- **docling-excellence-18-20** : Cible **~18/20 sur chaque domaine** (prod, SEO, sécu, qualité, PWA, infra, docs) — feuille de route `docs/workflow/1_planning/EXCELLENCE-18-20-PAR-DOMAINE.md` + combinaison multi-agent-workflow, prod-gaps, audits sécu/qualité, landing/UI
+- **docling-audit-senior-2026** : Audit monorepo **niveau auditeur senior 2026** — matrice périmètre/preuve (`CADRE-AUDIT-SENIOR-2026.md`), sous-agents Task + SKILL kit `cursor-project-kit`, Definition of Done, synthèse gatekeeper ; orchestrateur `.cursor/agents/docling-senior-audit-orchestrator.md`
+- **wwebdev** : Outils / effets CSS interactifs style **wweb.dev** (blur aurora, loaders conic-gradient, séparateurs, nav burger CSS, hover, backgrounds animés) — `.cursor/skills/wwebdev/` ; agent **wwebdev-css-expert**
+- **animejs-v4-expert** : Animations **anime.js v4** (timeline, stagger, scroll, easings) — `.cursor/skills/animejs-v4-expert/` ; avec **wwebdev** pour calques CSS + motion JS
+
+### Bonnes pratiques
+
+- **Progressive disclosure** : SKILL.md < 500 lignes ; détails dans `references/`
+- **Descriptions spécifiques** : Inclure des phrases de déclenchement (ex. "Use when...")
+- **Scripts** : Préférer les scripts aux instructions inline pour économiser le contexte
+
+### Validation avant commit
+
+```bash
+# Valider tous les skills du projet
+python scripts/validate_skills.py
+
+# Ou via Make
+make validate-skills
+```
+
+## Structure d'un skill
+
+```
+skill-name/
+├── SKILL.md              # Obligatoire — frontmatter + instructions
+├── references/           # Optionnel — documentation détaillée
+│   └── REFERENCE.md
+├── scripts/              # Optionnel — scripts exécutables
+│   └── helper.sh
+└── assets/               # Optionnel — templates, images
+```
+
+## Ressources
+
+- [Spécification Agent Skills](https://agentskills.io/specification)
+- [Intégration dans un agent](https://agentskills.io/integrate-skills.md)
+- [Index documentation](https://agentskills.io/llms.txt)
+- [docs/ai-library/README.md](docs/ai-library/README.md) — **bibliothèque IA complète** (éditeurs, agents, tests, doc, MCP, frameworks)
+- [Awesome AI Coding Tools](https://github.com/ai-for-developers/awesome-ai-coding-tools) — liste d’outils IA (Cursor, agents, MCP, tests, doc) pour suggestions

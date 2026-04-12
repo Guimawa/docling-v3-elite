@@ -1,0 +1,45 @@
+{
+  "version": "1.0",
+  "source": "Spline Community + Library — https://spline.design/community",
+  "scenes": {
+    "empty-state": [
+      {
+        "id": "empty-doc",
+        "url": "https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode",
+        "label": "Document/objet minimal",
+        "mood": "neutre, professionnel",
+        "size": "compact"
+      }
+    ],
+    "hero": [
+      {
+        "id": "hero-abstract",
+        "url": "https://prod.spline.design/9951u9cumiw2Ehj8/scene.splinecode",
+        "label": "Formes abstraites",
+        "mood": "moderne, tech",
+        "size": "medium"
+      },
+      {
+        "id": "hero-cube",
+        "url": "https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode",
+        "label": "Cube interactif",
+        "mood": "simple, épuré",
+        "size": "compact"
+      }
+    ],
+    "logo": [
+      {
+        "id": "logo-minimal",
+        "url": "https://prod.spline.design/KFonZGtsoUXP-qx7/scene.splinecode",
+        "label": "Logo 3D minimal",
+        "mood": "corporate, clean",
+        "size": "compact"
+      }
+    ]
+  },
+  "coherence_rules": {
+    "max_per_page": 2,
+    "prefer_same_mood": true,
+    "priority_order": ["empty-state", "hero", "logo", "cta"]
+  }
+}

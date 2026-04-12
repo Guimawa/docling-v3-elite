@@ -1,0 +1,25 @@
+---
+description: Conventions frontend — React, Vue, composants. Priorité 40.
+globs: ["src/**", "components/**", "**/components/**", "frontend/**"]
+alwaysApply: false
+---
+
+# Frontend Conventions
+
+## Composants
+
+- Fonctionnels, hooks.
+- Pas de classes.
+- Props typées si TypeScript.
+
+## Structure
+
+- pages/ : pages/routes.
+- components/ : composants réutilisables.
+- services/ : appels API.
+- config/ : endpoints, features.
+
+## Styles
+
+- Tailwind ou équivalent : classes utilitaires.
+- Pas de styles inline sauf dynamiques.

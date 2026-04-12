@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr" data-theme="ivory">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <!-- CSP : source de vérité = headers HTTP Netlify (netlify.toml), pas de meta ici
+         (évite l'intersection stricte avec connect-src *.run.app pour l'API Cloud Run). -->
+
+    <!-- PWA Core -->
+    <meta name="theme-color" content="#B45309" />
+
+    <!-- iOS Safari PWA — OBLIGATOIRE pour installation propre iPhone -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Docling" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+
+    <!-- SEO — valeurs par défaut avant hydratation React (usePageSeo met à jour par route) -->
+    <title>Docling — Factures fournisseurs BTP, extraction IA & catalogue</title>
+    <meta
+      name="description"
+      content="Docling : factures fournisseurs BTP en PDF ou photo. Extraction IA multilingue, validation humaine, catalogue de prix, export CSV/Excel. Web mobile et bureau."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Docling" />
+    <link rel="canonical" href="https://d0cling.netlify.app/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Docling" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:url" content="https://d0cling.netlify.app/" />
+    <meta
+      property="og:title"
+      content="Docling — Factures fournisseurs BTP, extraction IA & catalogue"
+    />
+    <meta
+      property="og:description"
+      content="Docling : factures fournisseurs BTP en PDF ou photo. Extraction IA multilingue, validation humaine, catalogue de prix, export CSV/Excel."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Docling — Factures fournisseurs BTP, extraction IA & catalogue"
+    />
+    <meta
+      name="twitter:description"
+      content="Docling : factures fournisseurs BTP en PDF ou photo. Extraction IA multilingue, validation humaine, catalogue de prix, export CSV/Excel."
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-192.png" />
+
+    <!-- Google Fonts: Inter (landing 2026) + Sora (headings/stats) + DM Sans (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Preload critical fonts for FCP/LCP -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=DM+Sans:wght@400;500;700&family=Sora:wght@600;800&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=DM+Sans:wght@400;500;700&family=Sora:wght@600;800&display=swap">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

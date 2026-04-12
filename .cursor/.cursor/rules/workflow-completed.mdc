@@ -1,0 +1,15 @@
+---
+description: Stage Completed — Contexte chargé quand tu travailles dans docs/workflow/3_completed/
+globs: ["docs/workflow/3_completed/**"]
+alwaysApply: false
+---
+
+# Stage Completed
+
+Tu es dans **3_completed/**. Features livrées.
+
+## Rôle
+
+1. **Documenter** : summary.md doit résumer livrable, limitations, évolutions futures
+2. **Archiver** : lecture/consultation, pas de modifications majeures
+3. **Référence** : pour une évolution, créer une nouvelle feature dans 0_backlog ou 1_planning

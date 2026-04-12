@@ -1,0 +1,58 @@
+---
+description: Bibliothèque IA — outils à UTILISER (exécuter), pas suggérer. L'agent lance ces outils selon le contexte.
+globs: ["**/*"]
+alwaysApply: true
+---
+
+# Bibliothèque IA — L'agent UTILISE ces outils
+
+Quand le contexte l'exige → **exécuter** l'outil (pas proposer à l'utilisateur).
+
+## Quand UTILISER quoi
+
+| Contexte | Action — exécuter |
+|----------|-------------------|
+| **Après modification code** | Validation ciblée (ruff/eslint + tests impactés) |
+| **Review code** | `.\scripts\review.ps1` |
+| **Générer tests** | Agent test-generator + lancer pytest/vitest |
+| **Doc à jour** | Context7 MCP (si dispo) ou fetch docs |
+| **Avant merge/release** | `.\scripts\validate_all.ps1` |
+
+## Tests & QA
+Qodo (tests+qualité), Meticulous (visuels), TestRigor (langage clair), Mabl, Applitools, Checksum AI, OctoMind, Launchable (prédit quels tests), Parasoft, DiffBlue (Java).
+
+## Code Review
+Qodo, Sourcery (30+ langages), Gito (open-source, GitHub Actions), CodeRabbit, Refact.ai.
+
+## PR Review
+Sweep, Greptile, CodeRabbit, What The Diff.
+
+## Éditeurs & Assistants
+Cursor, Cody, Windsurf, Aider, Claude Desktop, Zed, Continue, Tabby.
+
+## App Builders
+Bolt.new, Lovable, Capacity, Dyad.sh, Rocket.new.
+
+## Outils dev
+SpecStory (contexte entre chats), Task Master, Context7 (MCP doc), Supercode.sh (Cursor).
+
+## Code Completion
+Copilot, Codeium, Tabnine, Refact.ai, Continue.
+
+## Coding Agents
+Claude Code, Gemini CLI, Aider, OpenHands, Cline, GPT Engineer.
+
+## Documentation
+Mintlify, Trelent, README-AI, GPTutor (explications code).
+
+## MCP
+Context7, Neon MCP, Figma MCP. Répertoires : PulseMCP, Cursor MCP Directory.
+
+## Frameworks
+Trellis (injection specs), PAELLADOC (contexte), Agent Skills (agentskills.io).
+
+## DevOps & Sécurité
+Harness, GitLab AI, Snyk, GitGuardian, Bearer CLI, Semgrep.
+
+---
+Détails complets : docs/ai-library/

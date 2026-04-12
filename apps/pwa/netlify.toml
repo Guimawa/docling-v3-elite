@@ -1,0 +1,20 @@
+# Configuration Netlify - Docling PWA 2026
+# Ce fichier gère le proxy API pour éviter les erreurs CORS et simplifier l'authentification.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Redirection magique : tout ce qui commence par /api va vers ton Cloud Run
+# Cela permet au navigateur de croire que le frontend et l'API sont sur le MEME domaine.
+[[redirects]]
+  from = "/api/*"
+  to = "https://docling-api-xyz.a.run.app/api/:splat" # REMPLACE PAR TON URL CLOUD RUN
+  status = 200
+  force = true
+
+# Gestion du mode PWA (Single Page Application)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

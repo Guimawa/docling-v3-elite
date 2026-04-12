@@ -1,0 +1,29 @@
+---
+description: Standards d'ingénierie de base — clarté, maintenabilité, tests. Priorité 10.
+alwaysApply: true
+---
+
+# Core Engineering Standards
+
+## Principes
+
+- Écrire du code maintenable, lisible, convention-driven.
+- Préférer la clarté à la ruse.
+- Toujours inclure des tests automatisés pour toute nouvelle logique.
+- Éviter les nouvelles dépendances sauf nécessité.
+
+## Style
+
+- Instructions impératives courtes.
+- Nommer clairement variables et fonctions.
+- DRY : ne pas dupliquer.
+
+## Exemple
+
+```python
+# bad
+User.create(params)
+
+# good
+User.create(user_params)
+```

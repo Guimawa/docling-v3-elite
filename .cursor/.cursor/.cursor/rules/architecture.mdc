@@ -1,0 +1,22 @@
+---
+description: Contraintes d'architecture — couches, frontières. Priorité 60.
+alwaysApply: false
+---
+
+# Architecture Standards
+
+## Couches
+
+- Controllers/Routes : pas de logique métier.
+- Services : logique métier, stateless, testable.
+- Repositories/Data : accès données uniquement.
+
+## Frontières
+
+- Respecter les dépendances entre couches.
+- Pas de couplage circulaire.
+- Interfaces claires entre modules.
+
+## Référence
+
+Consulter docs/ARCHITECTURE.md ou équivalent pour les règles projet-spécifiques.

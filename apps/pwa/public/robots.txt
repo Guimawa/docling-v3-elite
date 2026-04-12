@@ -1,0 +1,9 @@
+# Docling PWA — pages publiques explorables.
+# Fichier régénéré au démarrage Vite (voir vite-plugin-seo-assets.js). Sitemap : VITE_SITE_URL.
+
+User-agent: *
+Allow: /
+
+Disallow: /design-system
+
+Sitemap: http://localhost:5173/sitemap.xml
