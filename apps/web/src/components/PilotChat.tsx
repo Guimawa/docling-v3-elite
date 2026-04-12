@@ -28,16 +28,26 @@ export default function PilotChat() {
     setInput('');
     setIsTyping(true);
 
-    // Simulation d'intelligence contextuelle Gemini
-    setTimeout(() => {
+    try {
+      const response = await fetch('https://docling-api.guimawa.workers.dev/api/v1/pilot/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }, // TODO: Add auth token
+        body: JSON.stringify({ message: input })
+      });
+      
+      const data = await response.json();
+      
       const resp: Message = { 
         id: (Date.now() + 1).toString(), 
         role: 'assistant', 
-        content: "D'après vos factures récentes (Bosch, Leroy Merlin), votre consommation de matériaux a augmenté de 12% ce mois-ci. Voulez-vous voir le détail ?" 
+        content: data.response || "Désolé Sophie, je rencontre une petite turbulence technique." 
       };
       setMessages(prev => [...prev, resp]);
+    } catch (err) {
+      console.error("Erreur Pilot:", err);
+    } finally {
       setIsTyping(false);
-    }, 1500);
+    }
   };
 
   return (

@@ -77,10 +77,14 @@ export default function AtlasBrowser() {
           </div>
         </aside>
 
-        {/* 3. Zone de Résultats */}
+        {/* 3. Zone de Résultats / Carte */}
         <main className="results-area">
           <div className="flex-row justify-between items-center mb-6">
             <h3 className="section-title">{results.length} relevés trouvés</h3>
+            <div className="bg-slate-100 p-1 rounded-xl flex-row">
+               <button className="px-4 py-2 bg-white rounded-lg shadow-sm text-xs font-bold">Liste</button>
+               <button className="px-4 py-2 text-xs font-bold opacity-50">Carte</button>
+            </div>
           </div>
 
           <div className="card-grid">
@@ -98,6 +102,23 @@ export default function AtlasBrowser() {
               </div>
             ))}
           </div>
+
+          {/* SIMULATION CARTE (Mode Phase 5) */}
+          {results.length > 0 && (
+            <div className="atlas-map-simulation mt-10 rounded-[32px] overflow-hidden border border-slate-100 relative h-[400px]">
+               <div className="absolute inset-0 bg-blue-50/30" />
+               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-blue-400/10 rounded-full blur-3xl animate-pulse" />
+               <div className="absolute inset-0 items-center justify-center flex flex-col">
+                  <span className="text-4xl mb-4">🗺️</span>
+                  <p className="text-sm font-bold text-blue-900 opacity-60 uppercase tracking-widest">Vue Tactique Active</p>
+               </div>
+               {/* Points d'intérêt géo-localisés */}
+               {results.map((r, i) => (
+                 <div key={i} className="absolute w-3 h-3 bg-blue-500 rounded-full border-2 border-white shadow-lg" 
+                      style={{ top: `${20 + (i*15)%60}%`, left: `${30 + (i*20)%50}%` }} />
+               ))}
+            </div>
+          )}
         </main>
       </div>
 

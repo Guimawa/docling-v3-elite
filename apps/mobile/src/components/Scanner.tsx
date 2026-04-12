@@ -102,22 +102,40 @@ export default function Scanner({ onComplete }: { onComplete: (data?: any) => vo
       <CameraView ref={cameraRef} className="flex-1">
         <View className="flex-1 items-center justify-center">
           {/* Viseur Crystal Design */}
-          <View className={`w-72 h-[450px] border-4 ${countdown === 0 ? 'border-blue-400' : 'border-white/20'} rounded-[40px] border-dashed items-center justify-center overflow-hidden`}>
+          <View className={`w-72 h-[450px] border-4 ${countdown === 0 ? 'border-blue-400' : 'border-white/10'} rounded-[40px] items-center justify-center overflow-hidden`}>
              <View className="absolute inset-0 bg-white/5" />
+             
+             {/* LIGNE LASER (Animation de Scan 2026) */}
+             <View 
+               className="absolute w-full h-[2px] bg-blue-400/50 shadow-lg shadow-blue-400"
+               style={{ 
+                 top: countdown !== null ? '50%' : '0%', // Simulation de mouvement
+                 opacity: 0.8
+               }} 
+             />
+
              {countdown !== null && countdown > 0 && (
-               <Text className="text-white text-8xl font-black opacity-30">{countdown}</Text>
+               <View className="bg-black/40 w-24 h-24 rounded-full items-center justify-center border border-white/10">
+                 <Text className="text-white text-5xl font-black">{countdown}</Text>
+               </View>
              )}
+
              {(isScanning || isSyncing) && (
-               <ActivityIndicator size="large" color="#3B82F6" />
+               <View className="bg-white/10 p-6 rounded-3xl backdrop-blur-xl border border-white/20">
+                 <ActivityIndicator size="large" color="#3B82F6" />
+                 <Text className="text-white/80 text-[10px] font-bold mt-4 tracking-widest text-center uppercase">Traitement IA...</Text>
+               </View>
              )}
           </View>
           
-          <View className="mt-12 items-center">
-            <Text className="text-white/60 font-bold tracking-[4px] uppercase text-xs mb-2">
-              Docling Silent Pilot
-            </Text>
-            <Text className="text-white/40 text-sm">
-              Stabilisez pour capturer automatiquement
+          <View className="mt-12 items-center px-12">
+            <View className="bg-white/10 px-4 py-2 rounded-full border border-white/5 mb-4">
+              <Text className="text-blue-400 font-bold tracking-[2px] uppercase text-[10px]">
+                Silent Pilot Active
+              </Text>
+            </View>
+            <Text className="text-white/40 text-sm text-center leading-5">
+              Placez la facture dans le cadre. L'intelligence Docling s'occupe du reste.
             </Text>
           </View>
         </View>

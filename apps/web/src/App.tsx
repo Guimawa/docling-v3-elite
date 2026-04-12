@@ -1,18 +1,25 @@
-import { useState, useEffect } from 'react'
 import { supabase } from './lib/supabase'
 import AtlasBrowser from './components/AtlasBrowser'
 import PilotChat from './components/PilotChat'
+import LandingPage from './pages/LandingPage'
+import AuthPage from './pages/AuthPage'
 
 function App() {
-  const [view, setView] = useState<'dashboard' | 'atlas'>('dashboard')
+  const [view, setView] = useState<'dashboard' | 'atlas' | 'landing' | 'auth'>('landing')
   const [showPilot, setShowPilot] = useState(false)
   const [invoices, setInvoices] = useState<any[]>([])
-  const [_error, _setError] = useState<string | null>(null)
+  const [session, setSession] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetchInvoices()
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session)
+      if (session) setView('dashboard')
+    })
   }, [])
+
+  if (view === 'landing') return <LandingPage onGoAuth={() => setView('auth')} />
+  if (view === 'auth') return <AuthPage onBack={() => setView('landing')} />
 
   async function fetchInvoices() {
     try {
@@ -60,6 +67,31 @@ function App() {
           >
             <span>🤖</span> Pilot Chat
           </div>
+        </div>
+
+        {/* STRIPE MANAGEMENT SECTION */}
+        <div style={{marginTop: 'auto', padding: '20px', background: 'rgba(59, 130, 246, 0.05)', borderRadius: '24px', border: '1px solid rgba(59, 130, 246, 0.1)'}}>
+          <h4 style={{fontSize: '12px', fontWeight: '800', color: 'var(--accent-pronto)', textTransform: 'uppercase', marginBottom: '8px'}}>Plan Pro Elite</h4>
+          <p style={{fontSize: '11px', color: '#94A3B8', marginBottom: '16px'}}>Scans illimités et export comptable automatisé.</p>
+          <button 
+            style={{
+              width: '100%',
+              background: 'var(--accent-pronto)',
+              color: 'white',
+              border: 'none',
+              padding: '12px',
+              borderRadius: '12px',
+              fontWeight: '800',
+              fontSize: '12px',
+              cursor: 'pointer'
+            }}
+            onClick={() => {
+               window.location.href = "https://billing.stripe.com/p/login/test_YOUR_LINK"; 
+               // Note: En mode réel, on utiliserait authClient.stripe.createCustomerPortal(...)
+            }}
+          >
+            Gérer mon abonnement
+          </button>
         </div>
       </nav>
 

@@ -82,6 +82,8 @@ export default function App() {
       <QuickSwipeReview 
         data={{
           fournisseur: currentInvoice.fournisseur || 'Inconnu',
+          total_ht: currentInvoice.total_ht || 0,
+          total_tva: currentInvoice.total_tva || 0,
           total_ttc: currentInvoice.total_ttc || 0,
           date_facture: currentInvoice.date_facture || 'N/A'
         }}

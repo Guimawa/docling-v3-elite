@@ -18,8 +18,8 @@ interface SyncState {
   syncNow: () => Promise<any | null>;
 }
 
-// Utiliser l'IP de votre machine pour les tests sur mobile physique
-const API_URL = 'http://192.168.1.1:8787/api/v1/scan'; 
+// Configuration dynamique de l'API (Remplacer par votre URL de production à terme)
+const API_URL = 'https://docling-api.guimawa.workers.dev/api/v1/scan'; 
 const MAX_ATTEMPTS = 5;
 
 export const useSyncStore = create<SyncState>()(
@@ -49,12 +49,14 @@ export const useSyncStore = create<SyncState>()(
           while (currentQueue.length > 0) {
             const item = currentQueue[0];
             
-            // On saute les items qui ont trop échoué
+            // Éviter de saturer le serveur si trop d'échecs
             if (item.attempts >= MAX_ATTEMPTS) {
-              console.warn(`⚠️ Abandon de l'item ${item.uri} (trop d'échecs)`);
-              currentQueue.shift();
+              console.warn(`⚠️ Item ${item.uri} déplacé en fin de file (échecs critiques)`);
+              currentQueue.push(currentQueue.shift()!);
               continue;
             }
+
+            console.log(`📤 Synchronisation en cours : ${item.uri} (Tentative ${item.attempts + 1}/${MAX_ATTEMPTS})`);
 
             const formData = new FormData();
             formData.append('file', {
@@ -70,26 +72,29 @@ export const useSyncStore = create<SyncState>()(
 
             const response = await fetch(API_URL, {
               method: 'POST',
-              headers: { 'Authorization': 'Bearer development-test-token' },
+              headers: { 
+                'Authorization': `Bearer development-test-token`, // TODO: Injecter JWT réel
+                'Accept': 'application/json'
+              },
               body: formData
             });
 
             if (response.ok) {
               const res = await response.json();
               lastResult = res.data;
-              currentQueue.shift();
-              console.log('✅ Un élément synchronisé');
+              currentQueue.shift(); // Réussite ! On retire l'élément
+              console.log('✅ Synchronisation réussie');
             } else {
               item.attempts++;
-              // On arrête la boucle pour cet essai si c'est une erreur serveur
-              break; 
+              console.warn(`❌ Échec synchro (${response.status}), l'élément sera re-tenté.`);
+              break; // On arrête pour cette fois
             }
             
-            // Mise à jour de la queue après chaque réussite
             set({ queue: [...currentQueue] });
           }
           return lastResult;
-        } catch (err) {
+        }
+ catch (err) {
           console.error('💥 Erreur durant le drainage de la file:', err);
           return null;
         } finally {

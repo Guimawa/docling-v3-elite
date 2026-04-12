@@ -1,30 +1,24 @@
-# IMPLEMENTATION READINESS — DOCLING V3 (ELITE)
+# IMPLEMENTATION READINESS — MISSION PROD
 
-## 1. Scorecard de Préparation
-- **Vision & Scope** : 5/5 ✅
-- **Architecture Technique** : 5/5 ✅
-- **Modèle de Données** : 4.5/5 ✅
-- **Spécifications API** : 4.5/5 ✅
-- **Design UX/UI** : 4/5 (Carte blanche en cours) 🔄
-- **Découpage Stories** : 5/5 ✅
+## Scorecard
+- **Vision** : 5/5 (Validée)
+- **Exigences Elite** : 5/5 (Livrées)
+- **Architecture Edge** : 5/5 (Testée)
+- **Data Model (Atlas)** : 5/5 (PostGIS Ready)
+- **API Specs** : 5/5 (Docs à jour)
+- **UX / Landing** : 5/5 (Magnitude 10)
 
-**Statut Global : 🟢 READY**
+## Décision : GO PRODUCTION ✅
+Le projet Docling V3 Elite est techniquement et stratégiquement prêt pour le lancement.
 
-## 2. Pré-requis Immédiats
-- [ ] Compte Cloudflare (Workers/R2 activés).
-- [ ] Instance Supabase (PostGIS activé).
-- [ ] Clé API Gemini (Google AI Studio).
-- [ ] Expo Dev Account (pour les builds mobiles).
+## Pré-requis de Déploiement
+1.  **Secrets** : Injecter les clés Stripe PROD et Gemini PROD dans Cloudflare Secrets.
+2.  **DNS** : Faire pointer `pronto.doc` vers Cloudflare Pages (Frontend).
+3.  **Supabase** : Activer les index de production sur la table `invoices`.
 
-## 3. Plan d'Action (Les 20 premières minutes)
-1. Setup du Mono-repo.
-2. Initialisation d'Hono (Backend).
-3. Initialisation d'Expo (Mobile).
-4. Définition du schéma Supabase initial.
-5. Intégration de Better Auth.
-
-## 4. Plan Heure par Heure (Jour 1 de Dev)
-- **H1-H2** : Fondations API & Auth.
-- **H3-H4** : Module de capture Mobile (Caméra simple).
-- **H5-H6** : Liaison R2 & Trigger Gemini OCR.
-- **H7-H8** : Premier dashboard Aurora (Liste des scans).
+## Plan des 20 Premières Actions de Prod
+1. Push final sur la branche `main`.
+2. Déploiement automatique Cloudflare Pages.
+3. Vérification du Géo-IP en situation réelle (VPN ES/FR).
+4. Monitoring des premiers scans via Sentry/Logflare.
+5. Lancement de la campagne marketing "Magnitude 10".

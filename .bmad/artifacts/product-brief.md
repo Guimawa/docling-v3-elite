@@ -1,23 +1,23 @@
-# PRODUCT BRIEF — DOCLING V3 (ELITE)
+# PRODUCT BRIEF — DOCLING V3 ELITE
 
 ## Vision
-Transformer chaque facture en une donnée vivante au service de l'artisan et de sa communauté.
+Devenir le système nerveux de l'artisan européen : "Scan, Analyze, Dominate."
 
-## Proposition de Valeur
-Pour **l'artisan moderne**, **Docling** est un **compagnon de gestion prédictif** qui **automatise l'administratif et éclaire les prix d'achat**, contrairement aux **outils isolés** qui **alourdissent la charge mentale**.
+## Proposition de valeur
+Pour les artisans du BTP en France, Espagne et Catalogne, Docling Elite est un assistant agentique qui automatise 100% de la capture de factures et offre une intelligence géo-prix unique, contrairement aux logiciels comptables classiques qui restent passifs.
 
-## Périmètre V1 (MVP Elite)
-- **INCLUS** :
-  - Mobile "Silent Pilot" (Capture Auto/Haptique).
-  - Cloud Engine (Hono + Gemini Multimodal).
-  - Web Dashboard "Aurora" (Widgets Agentiques).
-  - **Atlas des Prix** (Version initiale anonymisée).
-  - **Le Vault** (Archivage docs vitaux + rappels).
-- **EXCLUS** :
-  - Module de devis complet.
-  - Gestion de flotte de véhicules complexe.
+## Persona Primaire
+**Mateo (L'Artisan 2026)** : Gère des chantiers entre Perpignan et Barcelone. A besoin d'une interface catalane/espagnole, de détection automatique de pays, et d'une landing ultra-fluide pour ne pas perdre une minute.
 
-## Roadmap
-- **V1 (Docling Pilot)** : OCR, Vault, Atlas de base.
-- **V2 (Atlas Plus)** : Négociation fournisseur, historique prix dynamique.
-- **V3 (Community Full)** : Forum sémantique, entraide contextuelle IA.
+## Périmètre Elite (Production)
+- **INCLUS** : Auto-détection Géo-IP, Support FR/ES/CA, Landing Magnitude 10, Atlas Intelligence Géo-Prix.
+- **EXCLUS** : Gestion de paie, Signature électronique (V2).
+
+## KPIs Cibles
+- **Taux de Conversion Landing** : > 15% (Magnitude 10).
+- **Précision OCR** : 99.2% sur les SIRET/CIF.
+- **Vitesse d'Onboarding** : < 30s de la landing au premier scan.
+- **Uptime Production** : 99.99% (Edge Cloudflare).
+
+## Verdict Marché
+**GO PRODUCTION** : Le créneau "Capture Agile + Intelligence Géo-Prix" est sous-exploité en Europe du Sud.

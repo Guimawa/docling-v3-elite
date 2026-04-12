@@ -1,25 +1,26 @@
-# BRAINSTORM NOTES — DOCLING V3 (ELITE)
+# Brainstorm Notes — Docling V3 Elite (Superiority Drive)
 
-## Vrai Problème (Audit Consolidé)
-La rupture de flux entre le chantier (capture de factures/tickets) et la gestion (analyse des marges, prix matériaux, comptabilité). L'artisan perd son temps personnel car les outils actuels ne sont que des "boîtes à PDF" sans intelligence métier.
+## Vrai problème
+La gestion administrative des artisans est une "taxe mentale" qui prend 4h par semaine. Les solutions actuelles sont trop lentes ou pas assez locales.
 
-## Personnes Affectées
-- **Artisans (Solo & Petites Équipes)** : Navigation à vue sur les prix, surcharge nocturne.
-- **Clients** : Attente de devis.
-- **Communauté Pronto** : Besoin de données de marché fraîches et anonymes (Atlas).
+## Personnes affectées
+Artisans BTP (PME et Indépendants) en France et Espagne.
 
-## Douleurs & Gaps
-- Prix matériaux approximatifs -> Devis sous-évalués.
-- Gestion des garanties et docs vitaux oubliée.
-- Manque de "Feedback sensoriel" sur le terrain.
+## Douleur concrète
+- Perte de factures papier.
+- Saisie manuelle fastidieuse.
+- Difficulté à comparer les prix des matériaux en temps réel.
 
-## Intuitions de Solution (Le Module Docling)
-- **Silent Pilot** : Capture mobile ultra-rapide (Hono/Gemini).
-- **Elite Zoom** : Lien visuel instantané entre la donnée et la source.
-- **L'Atlas** : Visualisation locale des prix matériaux via données anonymisées.
-- **Smart Routing** : Questions techniques routées vers les acheteurs du même produit.
+## Gaps solutions actuelles (Expensya, etc.)
+- Pas nativement BTP (ne comprennent pas le BA13 vs Placo).
+- Pas d'intelligence collective de prix (Atlas).
 
-## Contraintes & Décisions de la session
-- **Stack** : Hono + Gemini + Expo + R2.
-- **Mode** : Cloud-first (Inférence asynchrone).
-- **Anonymat** : Protection stricte des données de marge sur l'Atlas.
+## Intuitions de solution
+- Scanner "Snap & Forget" ultra-rapide.
+- Assistant Pilot qui parle les langues locales (FR/ES/CA).
+- Détection automatique du contexte légal (SIRET/CIF).
+
+## Contraintes
+- Zero-touch (moins de 2 clics).
+- Offline-first (chantiers sans réseau).
+- Internationalisation totale.

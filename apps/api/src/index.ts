@@ -27,8 +27,55 @@ app.on(["POST", "GET"], "/api/auth/*", (c) => {
   return auth.handler(c.req.raw);
 });
 
+// --- STRIPE WEBHOOK ---
+app.post('/api/stripe/webhook', async (c) => {
+  const stripe = new Stripe(c.env.STRIPE_SECRET_KEY, { apiVersion: '2023-10-16' as any });
+  const signature = c.req.header('stripe-signature');
+  const body = await c.req.text();
+
+  if (!signature) return c.json({ error: 'No signature' }, 400);
+
+  try {
+    const event = stripe.webhooks.constructEvent(
+      body,
+      signature,
+      c.env.STRIPE_WEBHOOK_SECRET
+    );
+
+    const auth = getAuth(c.env);
+    // Le plugin @better-auth/stripe gère automatiquement la synchro via ce handler
+    await auth.api.stripeWebhookHandler({
+      body,
+      signature,
+    });
+
+    return c.json({ received: true });
+  } catch (err: any) {
+    console.error(`💥 Erreur Webhook Stripe: ${err.message}`);
+    return c.json({ error: err.message }, 400);
+  }
+});
+
 // Health Check
 app.get('/', (c) => c.text('Docling API 2026 - Better Auth & Stripe Enabled'));
+
+// [FR-GEO] AUTO-DETECTION DU PAYS (Cloudflare Proxy Headers)
+app.get('/api/v1/geo/detect', (c) => {
+  const country = c.req.header('cf-ipcountry') || 'FR'; // Détection Cloudflare
+  const config: Record<string, any> = {
+    'FR': { lang: 'fr', legal: 'SIRET', tax: 'TVA' },
+    'ES': { lang: 'es', legal: 'CIF/NIF', tax: 'IVA' },
+    'CA': { lang: 'ca', legal: 'NIF/DNI', tax: 'IVA' }
+  };
+  
+  const res = config[country] || { lang: 'en', legal: 'VAT ID', tax: 'TAX' };
+  
+  return c.json({ 
+    success: true, 
+    country,
+    ...res
+  });
+});
 
 // Endpoint de Scan & Extraction
 app.post('/api/v1/scan', async (c) => {
@@ -108,7 +155,7 @@ app.post('/api/v1/scan', async (c) => {
     }
 
     // 3. IA - GEMINI EXTRACTION (Appelée uniquement si document UNIQUE)
-    console.log('🤖 Initialisation Gemini 3.1 Flash-Lite...');
+    console.log('🤖 Initialisation Gemini 3.1 Flash-Lite (Expert BTP Edition)...');
     const genAI = new GoogleGenerativeAI(c.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ 
       model: c.env.GEMINI_MODEL || 'gemini-3.1-flash-lite',
@@ -117,32 +164,42 @@ app.post('/api/v1/scan', async (c) => {
         responseSchema: {
           type: SchemaType.OBJECT,
           properties: {
-            fournisseur: { type: SchemaType.STRING },
+            fournisseur: { type: SchemaType.STRING, description: "Nom légal de l'entreprise" },
+            siret: { type: SchemaType.STRING, description: "Numéro SIRET si visible" },
             numero_facture: { type: SchemaType.STRING },
             date_facture: { type: SchemaType.STRING },
+            total_ht: { type: SchemaType.NUMBER },
+            total_tva: { type: SchemaType.NUMBER },
             total_ttc: { type: SchemaType.NUMBER },
+            devise: { type: SchemaType.STRING, defaultValue: "EUR" },
             produits: {
               type: SchemaType.ARRAY,
               items: {
                 type: SchemaType.OBJECT,
                 properties: {
-                  designation_raw: { type: SchemaType.STRING },
-                  famille: { type: SchemaType.STRING },
-                  prix_brut_ht: { type: SchemaType.NUMBER },
+                  designation_raw: { type: SchemaType.STRING, description: "Libellé complet de l'article" },
+                  famille: { type: SchemaType.STRING, description: "Catégorie (ex: Gros Oeuvre, Outillage, Plomberie)" },
+                  quantite: { type: SchemaType.NUMBER },
+                  unite: { type: SchemaType.STRING, description: "U, M2, M3, ML, KG, etc." },
+                  prix_unitaire_ht: { type: SchemaType.NUMBER },
                   remise_pct: { type: SchemaType.NUMBER },
-                  prix_remise_ht: { type: SchemaType.NUMBER },
+                  prix_total_ht: { type: SchemaType.NUMBER },
                 },
-                required: ["designation_raw", "famille", "prix_remise_ht"]
+                required: ["designation_raw", "prix_total_ht"]
               }
             }
           },
-          required: ["fournisseur", "produits", "total_ttc"]
+          required: ["fournisseur", "total_ttc", "produits"]
         }
       }
     });
 
     const result = await model.generateContent([
-      `Extraire les données de cette facture BTP. Type : ${isNativePdf ? 'PDF Natif' : 'Scan'}.`,
+      `Tu es l'expert comptable BTP de Docling. Extrais les données de cette facture avec une précision absolue.
+       - Si c'est un bon de livraison, cherche le prix estimé ou marque 0.
+       - Identifie les remises commerciales souvent cachées dans les colonnes.
+       - Normalise les unités (ex: convertis 'Mètre Linéaire' en 'ML').
+       - Type de document : ${isNativePdf ? 'PDF Natif' : 'Scan'}.`,
       { inlineData: { data: Buffer.from(fileBuffer).toString("base64"), mimeType: file.type } }
     ]);
 
@@ -237,6 +294,36 @@ app.post('/api/v1/scan', async (c) => {
     console.error('💥 ERREUR FATALE:', err.message);
     return c.json({ error: err.message }, 500);
   }
+});
+
+// [US-012] PILOT CHAT : Intelligence Contextuelle (RAG Lite)
+app.post('/api/v1/pilot/chat', async (c) => {
+  const body = await c.req.json();
+  const userMessage = body.message;
+
+  const supabase = createClient(c.env.SUPABASE_URL, c.env.SUPABASE_SERVICE_KEY);
+
+  // 1. On récupère le contexte (Factures récentes)
+  const { data: invoices } = await supabase
+    .from('invoices')
+    .select('metadata, created_at')
+    .limit(15)
+    .order('created_at', { ascending: false });
+
+  // 2. On prépare le cerveau
+  const genAI = new GoogleGenerativeAI(c.env.GEMINI_API_KEY);
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+  const context = JSON.stringify(invoices);
+  const prompt = `Voici les dernières factures BTP de l'utilisateur : ${context}.
+                  L'utilisateur demande : "${userMessage}".
+                  Réponds de manière concise, précise et professionnelle en tant qu'assistant Docling.
+                  Cite des chiffres ou des fournisseurs réels si possible.`;
+
+  const result = await model.generateContent(prompt);
+  const response = result.response.text();
+
+  return c.json({ success: true, response });
 });
 
 // [FR30] ATLAS SEARCH : Intelligence Prix Géo-localisée

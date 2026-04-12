@@ -25,6 +25,16 @@ export const getAuth = (env: any) => {
     emailAndPassword: {
       enabled: true,
     },
+    socialProviders: {
+      google: {
+        clientId: env.GOOGLE_CLIENT_ID,
+        clientSecret: env.GOOGLE_CLIENT_SECRET,
+      },
+      apple: {
+        clientId: env.APPLE_CLIENT_ID,
+        clientSecret: env.APPLE_CLIENT_SECRET,
+      }
+    },
     plugins: [
       stripe({
         stripeClient,
@@ -38,7 +48,6 @@ export const getAuth = (env: any) => {
         ]
       })
     ],
-    // [FR onboarding] On force le nom complet à l'inscription
     user: {
       additionalFields: {
         specialization: {
@@ -49,4 +58,6 @@ export const getAuth = (env: any) => {
       }
     }
   });
+
+  return authInstance;
 };

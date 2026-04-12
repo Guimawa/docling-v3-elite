@@ -94,20 +94,29 @@ export default function QuickSwipeReview({
             <View className="p-8 justify-between flex-1">
               <View>
                 <View className="bg-blue-50 self-start px-3 py-1 rounded-full mb-4">
-                  <Text className="text-blue-600 font-black text-[10px] uppercase">Facture Détectée</Text>
+                  <Text className="text-blue-600 font-black text-[10px] uppercase">Révision Élite</Text>
                 </View>
                 
                 <Text className="text-gray-400 font-bold uppercase text-[10px] tracking-widest mb-1">Émetteur</Text>
-                <Text className="text-charcoal text-4xl font-black mb-10 leading-none">{data.fournisseur}</Text>
+                <Text className="text-charcoal text-4xl font-black mb-6 leading-none">{data.fournisseur}</Text>
 
-                <View className="h-[1px] bg-slate-100 w-full mb-8" />
+                <View className="flex-row justify-between mb-2">
+                   <Text className="text-gray-400 font-medium">Total HT</Text>
+                   <Text className="text-charcoal font-bold">{data.total_ht?.toFixed(2)}€</Text>
+                </View>
+                <View className="flex-row justify-between mb-6">
+                   <Text className="text-gray-400 font-medium">TVA</Text>
+                   <Text className="text-charcoal font-bold">{data.total_tva?.toFixed(2)}€</Text>
+                </View>
 
-                <Text className="text-gray-400 font-bold uppercase text-[10px] tracking-widest mb-1">Total à payer</Text>
-                <Text className="text-blue-600 text-6xl font-black tracking-tighter">{data.total_ttc.toFixed(2)}€</Text>
+                <View className="h-[1px] bg-slate-100 w-full mb-6" />
+
+                <Text className="text-gray-400 font-bold uppercase text-[10px] tracking-widest mb-1">Total TTC</Text>
+                <Text className="text-blue-600 text-6xl font-black tracking-tighter">{data.total_ttc?.toFixed(2)}€</Text>
               </View>
 
               <View className="flex-row items-baseline">
-                <Text className="text-gray-400 font-bold uppercase text-[10px] tracking-widest mr-2">Date du scan</Text>
+                <Text className="text-gray-400 font-bold uppercase text-[10px] tracking-widest mr-2">Facture du</Text>
                 <Text className="text-charcoal font-black text-base">{data.date_facture}</Text>
               </View>
             </View>
