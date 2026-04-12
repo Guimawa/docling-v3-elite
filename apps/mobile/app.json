@@ -1,4 +1,4 @@
-﻿{
+{
   "expo": {
     "name": "Docling",
     "slug": "docling",
@@ -9,11 +9,13 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
+      "bundleIdentifier": "fr.pronto.doc",
       "infoPlist": {
         "NSCameraUsageDescription": "Docling a besoin de votre caméra pour scanner vos factures sur le chantier."
       }
     },
     "android": {
+      "package": "fr.pronto.doc",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
