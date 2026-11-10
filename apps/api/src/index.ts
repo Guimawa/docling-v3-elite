@@ -2,6 +2,7 @@ import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { createClient } from '@supabase/supabase-js';
 import { GoogleGenerativeAI, SchemaType } from '@google/generative-ai';
+import Stripe from 'stripe';
 import { StorageService } from './services/storage';
 import { getAuth } from './lib/auth';
 
@@ -215,7 +216,7 @@ app.post('/api/v1/scan', async (c) => {
 
     // 5. STOCKAGE MULTI-CLOUD (BYOC)
     console.log('☁️ Gestion du stockage Cloud...');
-    const storageService = new StorageService(c.env, supabase);
+    const storageService = new StorageService(supabase);
     const storageResult = await storageService.uploadFile(file, userId, userProvider);
 
     if (storageResult.error) {
