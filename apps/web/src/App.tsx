@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { supabase } from './lib/supabase'
 import AtlasBrowser from './components/AtlasBrowser'
 import PilotChat from './components/PilotChat'
