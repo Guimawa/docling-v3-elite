@@ -173,10 +173,10 @@
 ## 📋 6. PLAN D'ACTION PRIORISÉ (ROADMAP)
 
 1. **Sprint 1 (Correctifs Bloquants — 24h)** :
-   - [ ] Importer `Stripe` et corriger l'instanciation de `StorageService` dans `apps/api/src/index.ts`.
-   - [ ] Réparer les templates literals de `apps/email-worker/src/index.ts`.
-   - [ ] Importer `useState` et `useEffect` dans `apps/web/src/App.tsx`.
-   - [ ] Nettoyer la terminaison binaire de `apps/web/src/main.tsx`.
+   - [x] Importer `Stripe` et corriger l'instanciation de `StorageService` dans `apps/api/src/index.ts`.
+   - [x] Réparer les templates literals de `apps/email-worker/src/index.ts`.
+   - [x] Importer `useState` et `useEffect` dans `apps/web/src/App.tsx`.
+   - [x] Nettoyer la terminaison binaire de `apps/web/src/main.tsx`.
 2. **Sprint 2 (Sécurisation & Conformité — 48h)** :
    - [ ] Supprimer le token de bypass `Bearer development-test-token`.
    - [ ] Activer Row Level Security (RLS) sur `atlas_prices` et `invoices`.
