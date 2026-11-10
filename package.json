@@ -8,7 +8,10 @@
     "dev": "concurrently \"npm run dev:api\" \"npm run dev:web\" \"npm run dev:mobile\"",
     "dev:api": "npm run dev -w docling-api",
     "dev:web": "npm run dev -w web",
-    "dev:mobile": "npm run dev -w mobile"
+    "dev:mobile": "npm run dev -w mobile",
+    "build": "npm run build -w web",
+    "build:web": "npm run build -w web",
+    "build:api": "cd apps/api && npx wrangler deploy --dry-run src/index.ts"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"
