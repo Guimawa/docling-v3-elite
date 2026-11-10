@@ -1,4 +1,4 @@
-import PostalMime from 'postal-mime';
+﻿import PostalMime from 'postal-mime';
 import { createClient } from '@supabase/supabase-js';
 
 export interface Env {
@@ -22,7 +22,7 @@ export default {
     for (const attachment of email.attachments) {
       // On ne prend que les PDF ou Images
       if (attachment.mimeType === 'application/pdf' || attachment.mimeType.startsWith('image/')) {
-        const filePath = `inbox/${Date.now()}-${attachment.filename}`;
+        const filePath = inbox/\-\;
         
         // 1. Upload vers Supabase Storage
         const { error: storageError } = await supabase.storage
@@ -42,7 +42,7 @@ export default {
           source: 'email'
         });
         
-        console.log(`Facture ${attachment.filename} ingérée avec succès.`);
+        console.log(Facture \ ingérée avec succès.);
       }
     }
   },

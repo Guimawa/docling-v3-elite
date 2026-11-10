@@ -1,7 +1,0 @@
-name = "docling-v3-elite"
-main = "apps/api/src/index.ts"
-compatibility_date = "2026-04-11"
-compatibility_flags = ["nodejs_compat"]
-
-[vars]
-# Variables d'environnement
